@@ -8,7 +8,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
-
+//te
 // functions
 void MainMenu(User user1, User user2);
 void Play_A_Game(User &user1, User &user2);
@@ -138,8 +138,7 @@ void CardsWars_Menu(User &user1, User &user2)
 		{
 		case 1:
 			system("CLS");
-			// activating the game here
-			break;
+			PlayWarAgainstUser(user1, user2);			break;
 		case 2:
 			system("CLS");
 			DataFilesReadOnly("War");
