@@ -8,7 +8,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
-//te
+
 // functions
 void MainMenu(User user1, User user2);
 void Play_A_Game(User &user1, User &user2);

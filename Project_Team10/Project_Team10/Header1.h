@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <time.h>
-#include "Header.h"
+#include "Structs.h"
 
 using namespace std;
 #define _CRT_SECURE_NO_WARNINGS
@@ -29,11 +29,11 @@ void PrintPack(CardPackage pack) {//for tests
 	}																	
 }
 void OneRoundWinner(User win, User looser) {
-	cout << "winner is: " << win.name << endl;
+	cout << "winner of this round is: " << win.name << endl;
 	cout << looser.name << " you such a looser go home" << endl;
 }
 void WarGameWinner(User win, User looser) {
-	cout << "winner is: " << win.name << endl;
+	cout << "\n\n and the big winner of the game is: " << win.name << endl;
 	cout << looser.name << " go home you are stupid" << endl;
 }
 void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
@@ -49,7 +49,7 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 		pack.Card_Package[i].num_of_card = 4;
 		pack.pack_size += 4;// unnesessery we know its 52 in the end
 	}
-	PrintPack(pack);//test, need 4 cards from  types 2-14
+	//PrintPack(pack);//test, need 4 cards from  types 2-14
 
 	for (int ctr_turns = 0; ctr_turns < num_of_turns; ctr_turns++) {//
 		/******************START OF U1 TURN***********************************/
@@ -77,8 +77,10 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 		/******************START OF U2 TURN***********************************/
 		cout <<"now its " << U2.name << " turn" << endl;
 		//U2 pull out card
-		cout << "press enter to draw card" << endl;
-		cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+		if (!U2.if_computer) {
+			cout << "press enter to draw card" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+		}
 		tmp = Random();
 		while (pack.Card_Package[tmp].num_of_card < 1 || pack.Card_Package[tmp].num_of_card>4)
 		{
@@ -95,7 +97,7 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 		PrintCard(u2_card);
 		/******************END OF U2 TURN***********************************/
 		cout <<  "\n pack:" << endl;
-		PrintPack(pack);
+		//PrintPack(pack);
 		cout <<endl;
 		/************* BATTLE BEGIN ****************/
 			cout << "		/************* BATTLE BEGIN ****************/" << endl;
@@ -111,10 +113,13 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 				cout << U1.name << " have " << u1_sum << " points in the pocket" << endl;
 				cout << U2.name << " have " << u2_sum << " points in the pocket" << endl;
 				if (u1_sum > u2_sum) {
-					cout << U1.name << "win in this battle" << endl; u1_wins_ctr++;
+					OneRoundWinner(U1, U2);
+
+					u1_wins_ctr++;
 				}
 				if (u1_sum < u2_sum) {
-					cout << U2.name << "win in this battle" << endl; u2_wins_ctr++;
+					OneRoundWinner(U2, U1);
+					u2_wins_ctr++;
 				}
 				if (u1_sum == u2_sum) {
 					cout << "no one win in this battle" << endl;//rare after beggining
@@ -128,7 +133,7 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 		/*****WarGameWinner******/
 		if (u1_wins_ctr > u2_wins_ctr) { WarGameWinner(U1, U2); }
 		if (u1_wins_ctr < u2_wins_ctr) { WarGameWinner(U2, U1); }
-		if (u1_wins_ctr == u2_wins_ctr) { cout << "both of you are loosers" << endl; }
+		if (u1_wins_ctr == u2_wins_ctr) { cout << "both of you are loosers" << endl; }//rare 
 
 	
 }

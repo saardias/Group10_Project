@@ -18,6 +18,7 @@ struct User {
 	the differance between users will apear as a saved data in this struct
 	*/
 	bool if_manager;
+	bool if_computer;
 	bool if_premium;
 	string name;
 	long password;
@@ -29,7 +30,7 @@ struct Card {
 };
 
 struct CardPackage {
-	Card Card_Package[12];
+	Card Card_Package[13];
 	int pack_size;
 };
 
