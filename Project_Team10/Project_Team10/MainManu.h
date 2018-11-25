@@ -1,8 +1,15 @@
+#pragma once
+
 #include <iostream>
 #include <limits>
-#include <cstdlib> 
+#include <cstdlib>
+
+#include "Header1.h"
+#define _CRT_SECURE_NO_WARNINGS
+
 using namespace std;
 
+// functions
 void Play_A_Game();
 void CardsWars_Manu();
 void Connect4_Manu();
