@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "Header.h"
+#include "Structs.h"
 
 using namespace std;
 #define _CRT_SECURE_NO_WARNINGS
