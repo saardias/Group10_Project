@@ -1,0 +1,4 @@
+Connect Four Instructions:
+Both players place a circle with their color on the board.
+The circles fall from the top down.
+The first person to connect a chain of four circles either diagonally, horizontally, or vertically wins the game. 

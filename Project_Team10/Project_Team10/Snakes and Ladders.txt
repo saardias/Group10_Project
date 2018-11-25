@@ -1,0 +1,7 @@
+Snakes and Ladders Instructions:
+Both players begin from the square 0 on the board and 20 points in the bank.
+With each toss of the dice, the players move a set amount of steps on the board, according to the dice’s result.
+If a player encounters a snake, he must move backward on the board. Skipping a snake costs 10 points.
+If a player encounters a ladder, he will have the option to move forward on the board.
+Moving forward using a ladder costs 5 points.
+The winner is the first person who reaches the top of the board.
