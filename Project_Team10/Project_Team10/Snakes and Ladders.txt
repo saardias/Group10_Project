@@ -4,4 +4,11 @@ With each toss of the dice, the players move a set amount of steps on the board,
 If a player encounters a snake, he must move backward on the board. Skipping a snake costs 10 points.
 If a player encounters a ladder, he will have the option to move forward on the board.
 Moving forward using a ladder costs 5 points.
+Each turn, every player recieves between 0 to 5 points.
 The winner is the first person who reaches the top of the board.
+Instructions for the premium user:
+Begins the game with 30 points.
+Only pays 3 points to go up a ladder.
+only pays 5 points to save himself from a snake.
+Recieves 0 to 10 points every turn.
+
