@@ -77,11 +77,11 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 		/******************START OF U2 TURN***********************************/
 		cout <<"now its " << U2.name << " turn" << endl;
 		//U2 pull out card
-		if (!U2.if_computer) {
+		//if (!U2.if_computer) {
 			cout << "press enter to draw card" << endl;
 			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-		}
-		tmp = Random();
+		//}
+		tmp = (Random()+7)%12;//need eli change
 		while (pack.Card_Package[tmp].num_of_card < 1 || pack.Card_Package[tmp].num_of_card>4)
 		{
 			//find legal card
@@ -110,6 +110,8 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 				u2_wins_ctr++;
 			}
 			else { //war state
+				cout << "		/************* WAR BEGIN ****************/" << endl;
+
 				cout << U1.name << " have " << u1_sum << " points in the pocket" << endl;
 				cout << U2.name << " have " << u2_sum << " points in the pocket" << endl;
 				if (u1_sum > u2_sum) {
@@ -134,6 +136,7 @@ void PlayWarAgainstUser(User U1, User U2, int num_of_turns = 26) {
 		if (u1_wins_ctr > u2_wins_ctr) { WarGameWinner(U1, U2); }
 		if (u1_wins_ctr < u2_wins_ctr) { WarGameWinner(U2, U1); }
 		if (u1_wins_ctr == u2_wins_ctr) { cout << "both of you are loosers" << endl; }//rare 
-
+		cout << "press enter to continue" << endl;
+		cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 	
 }

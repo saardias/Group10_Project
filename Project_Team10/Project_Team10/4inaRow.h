@@ -1,10 +1,8 @@
 #pragma once
-#include <windows.h>
 #include <iostream>
 using namespace std;
-#define red SetConsoleTextAttribute(hConsole, 12)
-#define blue SetConsoleTextAttribute(hConsole,9)
-#define normal SetConsoleTextAttribute(hConsole, 7)
+#define red 'r'
+#define blue 'b'
 #define r 'r'
 #define b 'b'
 #define Mlen 6
@@ -12,6 +10,7 @@ using namespace std;
 #define Disc (char)254
 #define Space ' '
 #define Win 4
+#define _CRT_SECURE_NO_WARNINGS
 typedef struct {
 	int len=Mlen, width=Mwidth; // size
 	char **player; // table view
@@ -22,7 +21,6 @@ bool Winner(int x, int y, char p,Board *B); // winner boolean function
 */
 
 void print(Board *B) {
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int i, j, p;
 	cout << "|";
 	for (j = 0; j < B->width; j++) {
@@ -36,14 +34,10 @@ void print(Board *B) {
 		for (j = 0; j < B->width; j++) {
 			cout << " ";
 			if (B->player[i][j] == 'r') {
-				red;
-				cout << Disc;
-				normal;
+				cout << red;
 			}
 			if (B->player[i][j] == 'b') {
-				blue;
-				cout << Disc;
-				normal;
+				cout << blue;
 			}
 			else {
 				if (B->player[i][j] != 'r' && B->player[i][j] != 'b') {

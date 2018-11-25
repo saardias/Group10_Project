@@ -5,5 +5,6 @@ int main()
 {
 	User one, two;
 	create_user(one, two);
+	MainMenu(one, two);
 	return 0;
 }

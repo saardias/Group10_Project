@@ -28,6 +28,7 @@ bool sign_in(User& player) {
 			users_out << admin << "\n";
 			player.if_manager = admin;
 			users_out << premium << "\n";
+			player.if_computer = false;
 			player.if_premium = premium;
 			users_out << user_name << "\n";
 			player.name = user_name;
@@ -53,6 +54,7 @@ bool sign_in(User& player) {
 			users_out << admin << "\n";
 			player.if_manager = admin;
 			users_out << premium << "\n";
+			player.if_computer = false;
 			player.if_premium = premium;
 			users_out << user_name << "\n";
 			player.name = user_name;
@@ -76,6 +78,10 @@ bool sign_in(User& player) {
 				users_in >> temp;
 				users_in >> temp_pass;
 				if (user_name == temp && pass == temp_pass) {
+					player.if_manager = admin;
+					player.if_premium = premium;
+					player.name = user_name;
+					player.password = pass;
 					users_in.close();
 					users_out.close();
 					return true;
@@ -107,17 +113,17 @@ void create_user(User& p1, User& p2) {
 	cout << "signing player 1 " << endl;
 	while (!sign_in(p1)) {}
 	do {
-		cout << "To play against a computer press 1\nTo play against a second player press 2" << endl;
+		cout << "To play against a signed player, press 1\nTo play against guest-players press 2\n";
 		cin >> choice;
-		if (choice == 1) {
+		if (choice == 2) {
 			p2.if_manager = false;
-			p2.if_computer = true;
+			p2.if_computer = false;
 			p2.if_premium = false;
-			p2.name = "Computer";
+			p2.name = "Guest";
 			p2.password = 0;
 			break;
 		}
-		else if (choice == 2) {
+		else if (choice == 1) {
 			cout << "signing player 2 " << endl;
 			while (!sign_in(p2)) {}
 		}

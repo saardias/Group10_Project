@@ -5,6 +5,7 @@
 #include "Header1.h"
 #include "Structs.h"
 #include "Instructions.h"
+#include "4inaRow.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
@@ -39,7 +40,7 @@ void MainMenu(User user1,User user2)
 		{
 		case 1:
 			system("CLS");
-			Play_A_Game(user1, user1);
+			Play_A_Game(user1, user2);
 			break;
 		case 2:
 			system("CLS");
@@ -178,7 +179,7 @@ void Connect4_Menu(User &user1, User &user2)
 		{
 		case 1:
 			system("CLS");
-			// activating the game here
+			PlayForInARow();//activating game here
 			break;
 		case 2:
 			system("CLS");
