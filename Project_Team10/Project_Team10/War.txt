@@ -1,0 +1,8 @@
+Cars War instructions:
+Each turn every player pick a card from the top of the deck.
+the player with the higher card is the winning of the current turn.
+the winner of the turn gets points according to the values of the cards in the fileds.
+
+the premium player can change the his current card with the top card of the deck. he can do it 3 times in a game.
+
+the winner of the game is the player with the higer number of points.

@@ -107,6 +107,7 @@ void create_user(User& p1, User& p2) {
 	while (!sign_in(p1)) {}
 	cout << "signing player 2 " << endl;
 	while (!sign_in(p2)) {}
+	MainMenu(p1, p2);
 }
 
 void get_user_data(string& user_name, long int& pass, bool& admin) {

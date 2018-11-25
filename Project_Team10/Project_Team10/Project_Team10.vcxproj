@@ -118,6 +118,8 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="1.Sign_in_modules.h" />
+    <ClInclude Include="Instructions.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="Header1.h" />
     <ClInclude Include="MainManu.h" />

@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "Header1.h"
 #include "Structs.h"
+#include "Instructions.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
@@ -24,6 +25,7 @@ void MainMenu(User user1,User user2)
 	bool Flag = true;
 	do
 	{
+		system("CLS");
 		cout << endl << endl << "       ####    G A M E - - - K I T    ####" << endl << endl;
 		cout << "        W A L C O M E - " <<user1.name<< endl << endl << "        Please choose option :" << endl << endl <<
 			"        1 ) Play a Game" << endl << endl <<
@@ -81,7 +83,7 @@ void Play_A_Game(User &user1, User &user2)
 	bool Flag = true;
 	do
 	{
-
+		system("CLS");
 		cout << endl << endl << "       ####    P l a y     ####    " << endl << endl;
 		cout <<
 			"        1 ) Cards Wars " << endl << endl <<
@@ -140,7 +142,8 @@ void CardsWars_Menu(User &user1, User &user2)
 			break;
 		case 2:
 			system("CLS");
-			// instructions here
+			DataFilesReadOnly("War");
+
 			break;
 		case 3:
 			system("CLS");
@@ -180,7 +183,7 @@ void Connect4_Menu(User &user1, User &user2)
 			break;
 		case 2:
 			system("CLS");
-			// instructions here
+			DataFilesReadOnly("Connect Four");
 			break;
 		case 3:
 			system("CLS");
@@ -220,7 +223,7 @@ void SnakesAndLadders_Menu(User &user1, User &user2)
 			break;
 		case 2:
 			system("CLS");
-			// instructions here
+			DataFilesReadOnly("Snakes and Ladders");
 			break;
 		case 3:
 			system("CLS");
