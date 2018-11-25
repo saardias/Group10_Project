@@ -103,11 +103,27 @@ bool sign_in(User& player) {
 }
 
 void create_user(User& p1, User& p2) {
+	int choice;
 	cout << "signing player 1 " << endl;
 	while (!sign_in(p1)) {}
-	cout << "signing player 2 " << endl;
-	while (!sign_in(p2)) {}
-	MainMenu(p1, p2);
+	do {
+		cout << "To play against a computer press 1\nTo play against a second player press 2" << endl;
+		cin >> choice;
+		if (choice == 1) {
+			p2.if_manager = false;
+			p2.if_computer = true;
+			p2.if_premium = false;
+			p2.name = "Computer";
+			p2.password = 0;
+			break;
+		}
+		else if (choice == 2) {
+			cout << "signing player 2 " << endl;
+			while (!sign_in(p2)) {}
+		}
+		else
+			cout << "Wrong input!" << endl;
+	} while (choice != 1 && choice != 2);
 }
 
 void get_user_data(string& user_name, long int& pass, bool& admin) {
