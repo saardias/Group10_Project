@@ -14,7 +14,7 @@ void MainManu()
 	bool Flag = true;
 	do
 	{
-		cout << endl << endl << "       ####    G A M E - - - K I T    ####    " << endl << endl;
+		cout << endl << endl << "       ####    G A M E - - - K I T    ####" << endl << endl;
 		cout << "        W A L C O M E   " << endl << endl << "        Please choose option :" << endl << endl <<
 			"        1 ) Play a Game" << endl << endl <<
 			"        2 ) Scoreboard" << endl << endl <<
