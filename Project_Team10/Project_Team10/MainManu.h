@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// functions
 void Play_A_Game();
 void CardsWars_Manu();
 void Connect4_Manu();
