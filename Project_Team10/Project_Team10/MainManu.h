@@ -1,6 +1,12 @@
+#pragma once
+
 #include <iostream>
 #include <limits>
-#include <cstdlib> 
+#include <cstdlib>
+
+#include "Header1.h"
+#define _CRT_SECURE_NO_WARNINGS
+
 using namespace std;
 
 void Play_A_Game();
