@@ -38,5 +38,11 @@
     <ClInclude Include="4inaRow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="visuals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="playSnD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

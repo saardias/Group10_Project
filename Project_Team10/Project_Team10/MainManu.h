@@ -6,6 +6,7 @@
 #include "Structs.h"
 #include "Instructions.h"
 #include "4inaRow.h"
+#include "playSnD.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
@@ -139,7 +140,8 @@ void CardsWars_Menu(User &user1, User &user2)
 		{
 		case 1:
 			system("CLS");
-			PlayWarAgainstUser(user1, user2);			break;
+			PlayWar(user1, user2);	//Changed here to play war against user to just play war
+			break;
 		case 2:
 			system("CLS");
 			DataFilesReadOnly("War");
@@ -219,7 +221,7 @@ void SnakesAndLadders_Menu(User &user1, User &user2)
 		{
 		case 1:
 			system("CLS");
-			// activating the game here
+			play_snakes_and_ladders(user1, user2);
 			break;
 		case 2:
 			system("CLS");

@@ -28,7 +28,6 @@ bool sign_in(User& player) {
 			users_out << admin << "\n";
 			player.if_manager = admin;
 			users_out << premium << "\n";
-			player.if_computer = false;
 			player.if_premium = premium;
 			users_out << user_name << "\n";
 			player.name = user_name;
@@ -54,7 +53,6 @@ bool sign_in(User& player) {
 			users_out << admin << "\n";
 			player.if_manager = admin;
 			users_out << premium << "\n";
-			player.if_computer = false;
 			player.if_premium = premium;
 			users_out << user_name << "\n";
 			player.name = user_name;
@@ -117,7 +115,6 @@ void create_user(User& p1, User& p2) {
 		cin >> choice;
 		if (choice == 2) {
 			p2.if_manager = false;
-			p2.if_computer = false;
 			p2.if_premium = false;
 			p2.name = "Guest";
 			p2.password = 0;
