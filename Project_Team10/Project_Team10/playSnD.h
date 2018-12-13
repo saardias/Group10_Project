@@ -35,7 +35,7 @@ void play_snakes_and_ladders(User U1, User U2) {
 		if (i % 2 != 0) {
 			cout << "It's " << U1.name << "'s turn. Press 0 to surrender. Press any other charachter to roll the dice." << endl; //pause menu here
 			cin >> choice;
-			if (choice != 0) {
+			if (choice != '0') {
 				std::this_thread::sleep_for(std::chrono::milliseconds(250));
 				dice = rand() % 6 + 1;
 			}
@@ -49,6 +49,13 @@ void play_snakes_and_ladders(User U1, User U2) {
 			PrintSnakesBoard(Board);
 			if (Board.U1_place >= 100) {
 				cout << U1.name << " has won the match!" << endl;
+				std::this_thread::sleep_for(std::chrono::milliseconds(3500));
+				cout << "Entering the menu." << endl << "Loading.. ";
+				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				for (int p = 3; p > 0; p--) {
+					cout << p << " ";
+					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				}
 				break;
 			}
 			else if (Board.U1_place == Board.snake1 || Board.U1_place == Board.snake2 || Board.U1_place == Board.snake3 || Board.U1_place == Board.snake4 || Board.U1_place == Board.snake5 || Board.U1_place == Board.snake6 || Board.U1_place == Board.snake7) {
@@ -77,7 +84,7 @@ void play_snakes_and_ladders(User U1, User U2) {
 		else {
 			cout << "It's " << U2.name << "'s turn. Press 0 to surrender. Press any other charachter to roll the dice." << endl; //pause menu here
 			cin >> choice;
-			if (choice != 0) {
+			if (choice != '0') {
 				std::this_thread::sleep_for(std::chrono::milliseconds(250));
 				dice = rand() % 6 + 1;
 			}
@@ -88,8 +95,15 @@ void play_snakes_and_ladders(User U1, User U2) {
 			cout << U2.name << " rolled " << dice << endl;
 			Board.U2_place += dice;
 			PrintSnakesBoard(Board);
-			if (Board.U2_place == 100) {
+			if (Board.U2_place >= 100) {
 				cout << U2.name << " has won the match!" << endl;
+				std::this_thread::sleep_for(std::chrono::milliseconds(3500));
+				cout << "Entering the menu." << endl << "Loading.. ";
+				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				for (int p = 3; p > 0; p--) {
+					cout << p << " ";
+					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				}
 				break;
 			}
 			else if (Board.U2_place == Board.snake1 || Board.U2_place == Board.snake2 || Board.U2_place == Board.snake3 || Board.U2_place == Board.snake4 || Board.U2_place == Board.snake5 || Board.U2_place == Board.snake6 || Board.U2_place == Board.snake7) {

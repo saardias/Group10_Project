@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 #define red 'r'
 #define blue 'b'
@@ -11,6 +12,7 @@ using namespace std;
 #define Space ' '
 #define Win 4
 #define _CRT_SECURE_NO_WARNINGS
+
 typedef struct {
 	int len=Mlen, width=Mwidth; // size
 	char **player; // table view
@@ -21,6 +23,7 @@ bool Winner(int x, int y, char p,Board *B); // winner boolean function
 */
 
 void print(Board *B) {
+
 	int i, j, p;
 	cout << "|";
 	for (j = 0; j < B->width; j++) {
