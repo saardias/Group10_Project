@@ -19,9 +19,9 @@ struct User {
 	*/
 	string name;
 	bool if_manager;
-	//bool if_computer;
 	bool if_premium;
 	long password;
+	int score;
 };
 
 struct Card {
