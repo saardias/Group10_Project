@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="1.Sign_in_modules.h" />
     <ClInclude Include="4inaRow.h" />
+    <ClInclude Include="Colors.h" />
     <ClInclude Include="Instructions.h" />
     <ClInclude Include="playSnD.h" />
     <ClInclude Include="Structs.h" />

@@ -76,8 +76,8 @@ bool sign_in(User& player) {
 				users_in >> temp;
 				users_in >> temp_pass;
 				if (user_name == temp && pass == temp_pass) {
-					player.if_manager = admin;
-					player.if_premium = premium;
+					player.if_manager = admin_temp;
+					player.if_premium = prem_temp;
 					player.name = user_name;
 					player.password = pass;
 					users_in.close();

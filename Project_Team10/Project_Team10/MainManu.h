@@ -181,7 +181,11 @@ void Connect4_Menu(User &user1, User &user2)
 		{
 		case 1:
 			system("CLS");
-			PlayForInARow();//activating game here
+			PlayForInARow(user1,user2);//activating game here
+			system("CLS");
+			cout << endl << endl << "       Press Enter to return to the main manu" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
 			break;
 		case 2:
 			system("CLS");
