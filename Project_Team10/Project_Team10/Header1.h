@@ -90,6 +90,11 @@ void PlayWar(User U1, User U2, int num_of_turns = 26) {
 			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 		}
 		tmp = Random();
+		if(tmp%3==0){ tmp +=3; }
+		if (tmp % 3 == 1) { tmp -= 2; }
+		if (tmp % 3 == 2) { tmp -= 4; }
+		tmp = tmp % 13;
+
 		while (pack.Card_Package[tmp].num_of_card < 1 || pack.Card_Package[tmp].num_of_card>4)
 		{
 			//find legal card
