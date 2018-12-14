@@ -21,6 +21,7 @@ struct User {
 	bool if_manager;
 	bool if_premium;
 	long password;
+	int logins;
 	int score;
 };
 
