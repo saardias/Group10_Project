@@ -3,6 +3,7 @@
 #include "Colors.h"
 #include <iostream>
 #include <stdlib.h>
+#include "Statistics.h"
 #define BoardLength 6
 #define Boardhwidth 7
 #define Win 4
@@ -59,6 +60,7 @@ void Winner_point(User Winner, User losser, int passed_turns)
 	int winner_points = 0;
 	winner_points = 1000 - (25 * passed_turns);
 	cout << "       with " << winner_points << " points" << endl << "       after " << passed_turns << " turns" << endl;
+	Set_Connect_Four_Statistics(Winner.name, losser.name);
 	// add update datas here
 }
 void PrintBoard(Board *board) //method for printing the board

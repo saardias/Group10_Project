@@ -7,6 +7,7 @@
 #include "Instructions.h"
 #include "4inaRow.h"
 #include "playSnD.h"
+#include "Statistics.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
@@ -20,8 +21,9 @@ void SnakesAndLadders_Menu(User &user1, User &user2);
 void Options_player(User &user1);
 void Options_Admin(User &user1);
 void Options_premium(User &user1);
+void WatchUserWinLose();
 
-void MainMenu(User user1,User user2)
+void MainMenu(User user1, User user2)
 {
 	int Choice;
 	bool Flag = true;
@@ -29,7 +31,7 @@ void MainMenu(User user1,User user2)
 	{
 		system("CLS");
 		cout << endl << endl << "       ####    G A M E - - - K I T    ####" << endl << endl;
-		cout << "        W A L C O M E - " <<user1.name<< endl << endl << "        Please choose option :" << endl << endl <<
+		cout << "        W A L C O M E - " << user1.name << endl << endl << "        Please choose option :" << endl << endl <<
 			"        1 ) Play a Game" << endl << endl <<
 			"        2 ) Scoreboard" << endl << endl <<
 			"        3 ) Options" << endl << endl <<
@@ -72,7 +74,7 @@ void MainMenu(User user1,User user2)
 			break;
 		default:
 			system("CLS");
-			cout<< endl << endl<< "       Wrong Choice. Choose Again" << endl << endl;
+			cout << endl << endl << "       Wrong Choice. Choose Again" << endl << endl;
 			cout << "       Press Enter to Continue" << endl;
 			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 		}
@@ -181,7 +183,7 @@ void Connect4_Menu(User &user1, User &user2)
 		{
 		case 1:
 			system("CLS");
-			PlayForInARow(user1,user2);//activating game here
+			PlayForInARow(user1, user2);//activating game here
 			system("CLS");
 			cout << endl << endl << "       Press Enter to return to the main manu" << endl;
 			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
@@ -246,22 +248,22 @@ void SnakesAndLadders_Menu(User &user1, User &user2)
 	} while (Flag);
 }
 
-void Options_player(User &user1) 
+void Options_player(User &user1)
 {
 	int Choice;
 	bool Flag = true;
 	do
 	{
-	system("CLS");
-	cout << endl << endl << "       ####     O P T I O N S     ####    " << endl << endl;
-	cout <<
-		"        1 ) Watch Wins / Losses " << endl << endl <<
-		"        2 ) Return" << endl << endl <<
-		"       ###################################" << endl;
-	cin >> Choice;
-	getchar();
-	switch (Choice)
-	{
+		system("CLS");
+		cout << endl << endl << "       ####     O P T I O N S     ####    " << endl << endl;
+		cout <<
+			"        1 ) Watch Wins / Losses " << endl << endl <<
+			"        2 ) Return" << endl << endl <<
+			"       ###################################" << endl;
+		cin >> Choice;
+		getchar();
+		switch (Choice)
+		{
 		case 1:
 			system("CLS");
 			// Watch Wins / Losses here
@@ -307,7 +309,7 @@ void Options_Admin(User &user1)
 			break;
 		case 2:
 			system("CLS");
-			// Watch Wins / Losses here
+			WatchUserWinLose();
 			break;
 		case 3:
 			system("CLS");
@@ -364,7 +366,7 @@ void Options_premium(User &user1)
 			break;
 		case 2:
 			system("CLS");
-			// Watch Wins / Losses here
+			WatchUserWinLose();
 			break;
 		case 3:
 			system("CLS");
@@ -387,4 +389,16 @@ void Options_premium(User &user1)
 			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 		}
 	} while (Flag);
+}
+
+void WatchUserWinLose()
+{
+	cout << "Connect Four Statistics : " << endl;
+	Display_Statistics("Connect Four");
+	cout << "Snakes and Ladders Statistics : " << endl;
+	Display_Statistics("Snakes and Ladders");
+	cout << "Cards War Statistics : " << endl;
+	Display_Statistics("War");
+	cout << endl << endl << "       Press Enter to return to options" << endl;
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 }

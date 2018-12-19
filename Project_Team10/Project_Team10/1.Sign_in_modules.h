@@ -171,3 +171,43 @@ void get_user_data(string& user_name, long int& pass, bool& admin) {
 	if (pass == admin_pass)
 		admin = 1;
 }
+
+
+void ChangeUserToPremium(string name)
+{
+	bool flag = true;
+	ifstream users_in;
+	ofstream users_out;
+	User temp;
+	users_in.open("user_data.txt");
+	users_out.open("temp.txt");
+	while (!users_in.eof()) {
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (temp.name == name)
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << 1;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+		else
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << temp.if_premium;
+		}
+	}
+	users_in.close();
+	users_out.close();
+	remove("user_data.txt");
+	rename("temp.txt", "user_data.txt");
+}

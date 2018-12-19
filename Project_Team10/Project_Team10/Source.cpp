@@ -4,6 +4,7 @@
 
 int main()
 {
+	ChangeUserToPremium("saar");
 	User one, two;
 	create_user(one, two);
 	MainMenu(one, two);
