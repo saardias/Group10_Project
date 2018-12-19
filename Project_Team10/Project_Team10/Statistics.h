@@ -255,3 +255,191 @@ void Master_Statistics_Reset(string User) { // function for master usage only //
 	remove("Cards Statistics.txt");
 	rename("temp.txt", "Cards Statistics.txt");
 }
+
+void Data_Base_User_Additional(string User) { // adding a new user to the statistic list data base // 
+	ifstream Set;
+	ofstream Update;
+	string Claim;
+	Set.open("Snakes and Ladders Statistics.txt");
+	Update.open("temp.txt");
+	while (getline(Set, Claim)) {
+		Update << Claim << endl;
+	}
+	Update << User << endl << "Win rate :0" << endl << "Lose rate :0" << endl;
+	Set.close();
+	Update.close();
+	remove("Snakes and Ladders Statistics.txt");
+	rename("temp.txt", "Snakes and Ladders Statistics.txt");
+	Set.open("Connect Four Statistics.txt");
+	Update.open("temp.txt");
+	while (getline(Set, Claim)) {
+		Update << Claim << endl;
+	}
+	Update << User << endl << "Win rate :0" << endl << "Lose rate :0" << endl;
+	Set.close();
+	Update.close();
+	remove("Connect Four Statistics.txt");
+	rename("temp.txt", "Connect Four Statistics.txt");
+	Set.open("Cards Statistics.txt");
+	Update.open("temp.txt");
+	while (getline(Set, Claim)) {
+		Update << Claim << endl;
+	}
+	Update << User << endl << "Win rate :0" << endl << "Lose rate :0" << endl;
+	Set.close();
+	Update.close();
+	remove("Cards Statistics.txt");
+	rename("temp.txt", "Cards Statistics.txt");
+}
+
+void Data_Base_User_Removal(string User) { // removing/deleting a user from the statistic list data base //
+	bool flag1 = false, flag2 = false, flag3 = false;
+	ifstream Set;
+	ofstream Update;
+	string Claim;
+	Set.open("Snakes and Ladders Statistics.txt");
+	Update.open("temp.txt");
+	while (getline(Set, Claim)) {
+		if (flag1 == true && flag2 == true && flag3 == true) {
+			flag1 = false;
+			flag2 = false;
+			flag3 = false;
+		}
+		if (flag2 == true)
+			flag3 = true;
+		if (flag1 == true)
+			flag2 = true;
+		if (Claim == User)
+			flag1 = true;
+		if (flag1 == false && flag2 == false && flag3 == false) {
+			Update << Claim << endl;
+		}
+		else
+			continue;
+	}
+	Set.close();
+	Update.close();
+	remove("Snakes and Ladders Statistics.txt");
+	rename("temp.txt", "Snakes and Ladders Statistics.txt");
+	Set.open("Connect Four Statistics.txt");
+	Update.open("temp.txt");
+	while (getline(Set, Claim)) {
+		if (flag1 == true && flag2 == true && flag3 == true) {
+			flag1 = false;
+			flag2 = false;
+			flag3 = false;
+		}
+		if (flag2 == true)
+			flag3 = true;
+		if (flag1 == true)
+			flag2 = true;
+		if (Claim == User)
+			flag1 = true;
+		if (flag1 == false && flag2 == false && flag3 == false) {
+			Update << Claim << endl;
+		}
+		else
+			continue;
+	}
+	Set.close();
+	Update.close();
+	remove("Connect Four Statistics.txt");
+	rename("temp.txt", "Connect Four Statistics.txt");
+	Set.open("Cards Statistics.txt");
+	Update.open("temp.txt");
+	while (getline(Set, Claim)) {
+		if (flag1 == true && flag2 == true && flag3 == true) {
+			flag1 = false;
+			flag2 = false;
+			flag3 = false;
+		}
+		if (flag2 == true)
+			flag3 = true;
+		if (flag1 == true)
+			flag2 = true;
+		if (Claim == User)
+			flag1 = true;
+		if (flag1 == false && flag2 == false && flag3 == false) {
+			Update << Claim << endl;
+		}
+		else
+			continue;
+	}
+	Set.close();
+	Update.close();
+	remove("Cards Statistics.txt");
+	rename("temp.txt", "Cards Statistics.txt");
+}
+// a display function display personal statistic , statistics being printed by user's in game name. //
+void Display_Personal_User_Statistics(string User) { 
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+	cout << "     \t    ******************** " << User << "'s Personal  Statistics ********************" << endl << endl;
+	ifstream Display;
+	string Claim;
+	bool flag1 = false, flag2 = false;
+	Display.open("Snakes and Ladders Statistics.txt");
+	cout << "\t\t ________________________________________________________" << endl;
+	cout << "\t\t|\t\t Game : Snakes and Ladders.\t\t |" << endl;
+	cout << "\t\t|\t\t\t\t\t\t\t |" << endl;
+	while (getline(Display, Claim)) {
+		if (flag2 == true) {
+			cout << "\t\t" << Claim << "\t |" << endl; // will display Lose rate :*
+			flag1 = false;
+			flag2 = false;
+			break;
+		}
+		if (flag1 == true) {
+			cout << "\t\t|\t" << Claim << "\t "; // will display Win rate :*
+			flag2 = true;
+		}
+		if (Claim == User) {
+			flag1 = true;
+		}
+	}
+	Display.close();
+	cout << "\t\t|\t\t\t\t\t\t\t |";
+	cout << endl << "\t\t|________________________________________________________|" << endl;
+	Display.open("Connect Four Statistics.txt");
+	cout << "\t\t| \t\t Game : Connect Four.   \t\t |" << endl;
+	cout << "\t\t|\t\t\t\t\t\t\t |" << endl;
+	while (getline(Display, Claim)) {
+		if (flag2 == true) {
+			cout << "\t\t" << Claim << "\t |" << endl; // will display Lose rate :*
+			flag1 = false;
+			flag2 = false;
+			break;
+		}
+		if (flag1 == true) {
+			cout << "\t\t|\t" << Claim << "\t "; // will display Win rate :*
+			flag2 = true;
+		}
+		if (Claim == User) {
+			flag1 = true;
+		}
+	}
+	Display.close();
+	cout << "\t\t|\t\t\t\t\t\t\t |";
+	cout << endl << "\t\t|________________________________________________________|" << endl;
+	Display.open("Cards Statistics.txt");
+	cout <<  "\t\t| \t\t Game : Cards Battle.   \t\t |" << endl;
+	cout << "\t\t|\t\t\t\t\t\t\t |" << endl;
+	while (getline(Display, Claim)) {
+		if (flag2 == true) {
+			cout << "\t\t" << Claim << "\t |" << endl; // will display Lose rate :*
+			flag1 = false;
+			flag2 = false;
+			break;
+		}
+		if (flag1 == true) {
+			cout << "\t\t|\t" << Claim << "\t "; // will display Win rate :*
+			flag2 = true;
+		}
+		if (Claim == User) {
+			flag1 = true;
+		}
+	}
+	Display.close();
+	cout << "\t\t|\t\t\t\t\t\t\t |";
+	cout << endl << "\t\t|________________________________________________________|" << endl << endl << endl;
+	
+}
