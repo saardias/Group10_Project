@@ -7,6 +7,7 @@
 #include "Header1.h"
 #include <thread>
 #include <chrono>
+#include "Colors.h"
 
 using namespace std;
 #define _CRT_SECURE_NO_WARNINGS
@@ -190,8 +191,20 @@ void PrintMiddle_U1_U2() { cout << "|U1&U2|"; }
 void PrintMiddle_Empty() { cout << "|     |"; }
 */
 
-void PrintDown_Lader() { cout << "|__ H_"; }
-void PrintDown_Snake() { cout << "|__ S_"; }
+void PrintDown_Lader() { 
+	cout << "|__ ";
+	ChangeColor(BROWN);
+	cout << "H";
+	ChangeColor(LIGHTGREY);
+	cout << "_";
+}
+void PrintDown_Snake() { 
+	cout << "|__ "; 
+	ChangeColor(LIGHTGREEN);
+	cout << "S";
+	ChangeColor(LIGHTGREY);
+	cout<<"_";
+}
 void PrintDown_Empty() { cout << "|_____"; }
 
 void PrintDown(int cube, SnakesBoard board) {
@@ -208,14 +221,18 @@ void PrintDown(int cube, SnakesBoard board) {
 void PrintUp_Lader(int cube) {
 	cout << "|" << cube;
 	if (cube < 10) { cout << " "; }
+	ChangeColor(BROWN);
 	cout << " H ";
+	ChangeColor(LIGHTGREY);
 
 }
 
 void PrintUp_Snake(int cube) {
 	cout << "|" << cube;
 	if (cube < 10) { cout << " "; }
+	ChangeColor(LIGHTGREEN);
 	cout << " S ";
+	ChangeColor(LIGHTGREY);
 }
 void PrintUp_Empty(int cube) {
 	cout << "|" << cube;
@@ -241,9 +258,28 @@ void PrintUp(int cube, SnakesBoard board) {
 }
 
 
-void PrintMiddle_U1() { cout << "|U1   "; }
-void PrintMiddle_U2() { cout << "|U2   "; }
-void PrintMiddle_U1_U2() { cout << "|U1&U2"; }
+void PrintMiddle_U1() {
+	cout << "|";
+	ChangeColor(LIGHTBLUE);
+	cout << "U1   ";
+	ChangeColor(LIGHTGREY);
+}
+void PrintMiddle_U2() { 
+	ChangeColor(LIGHTRED);
+	cout << "|";
+	cout << "U2   "; 
+	ChangeColor(LIGHTGREY);
+}
+void PrintMiddle_U1_U2() { 
+	cout << "|";
+	ChangeColor(LIGHTBLUE);
+	cout << "U1";
+	ChangeColor(LIGHTGREY);
+	cout << " ";
+	ChangeColor(LIGHTRED);
+	cout << "U2";
+	ChangeColor(LIGHTGREY);
+}
 void PrintMiddle_Empty() { cout << "|     "; }
 
 
