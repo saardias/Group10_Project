@@ -3,7 +3,9 @@
 //#include <string>
 #include <fstream>
 #include "Structs.h"
+#include "MainManu.h"
 using namespace std;
+
 
 //the function below updates the new statistic records of the winner and the defeated users especially made for Snakes and Ladders game.
 void Set_Snakes_And_Ladders_Statistics(string Winner,string Looser) { 
@@ -441,5 +443,7 @@ void Display_Personal_User_Statistics(string User) {
 	Display.close();
 	cout << "\t\t|\t\t\t\t\t\t\t |";
 	cout << endl << "\t\t|________________________________________________________|" << endl << endl << endl;
-	
+	cout << endl << endl << "       Press Enter to return to the Main menu" << endl;
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 }
+

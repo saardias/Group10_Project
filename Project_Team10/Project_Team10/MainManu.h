@@ -19,9 +19,21 @@ void CardsWars_Menu(User &user1, User &user2);
 void Connect4_Menu(User &user1, User &user2);
 void SnakesAndLadders_Menu(User &user1, User &user2);
 void Options_player(User &user1);
-void Options_Admin(User &user1);
-void Options_premium(User &user1);
+void Options_Admin(User &user1, User &user2);
+void Options_premium(User &user1, User &user2);
 void WatchUserWinLose();
+void PrintingUsersList();
+void WhatchLogins();
+void ResetUserStats();
+bool Check_Name_Input(string name);
+bool Check_Name_Input_of_UserToPremium(string name);
+void ChangeUserToPremium(string name);
+void UserToPremium(User &user2);
+void ResetUserLogins(string name);
+void Change_user_type(User &user2);
+void PremiumToUser();
+void Excahnge_Type_With_Player(User &user,User &user2);
+void Pre_Lost(User &pre, User &NewPre);
 
 void MainMenu(User user1, User user2)
 {
@@ -54,11 +66,11 @@ void MainMenu(User user1, User user2)
 			// options here
 			if (user1.if_manager)
 			{
-				Options_Admin(user1);
+				Options_Admin(user1, user2);
 			}
 			else if (user1.if_premium)
 			{
-				Options_premium(user1);
+				Options_premium(user1,user2);
 			}
 			else
 			{
@@ -266,7 +278,7 @@ void Options_player(User &user1)
 		{
 		case 1:
 			system("CLS");
-			// Watch Wins / Losses here
+			Display_Personal_User_Statistics(user1.name);
 			break;
 		case 2:
 			system("CLS");
@@ -283,7 +295,7 @@ void Options_player(User &user1)
 	} while (Flag);
 }
 
-void Options_Admin(User &user1)
+void Options_Admin(User &user1, User &user2)
 {
 	int Choice;
 	bool Flag = true;
@@ -294,7 +306,7 @@ void Options_Admin(User &user1)
 		cout <<
 			"        1 ) Users list " << endl << endl <<
 			"        2 ) Watch Wins / Losses " << endl << endl <<
-			"        3 ) Connections" << endl << endl <<
+			"        3 ) Logins of players" << endl << endl <<
 			"        4 ) Reset user data" << endl << endl <<
 			"        5 ) Change user type" << endl << endl <<
 			"        6 ) Delete user" << endl << endl <<
@@ -305,7 +317,10 @@ void Options_Admin(User &user1)
 		switch (Choice)
 		{
 		case 1:
-			// user list
+			system("CLS");
+			PrintingUsersList();
+			cout << endl << endl << "       Press Enter to return" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 			break;
 		case 2:
 			system("CLS");
@@ -313,15 +328,15 @@ void Options_Admin(User &user1)
 			break;
 		case 3:
 			system("CLS");
-			// Connections here
+			WhatchLogins();
 			break;
 		case 4:
 			system("CLS");
-			//  Reset user data here
+			ResetUserStats();
 			break;
 		case 5:
 			system("CLS");
-			//  Change user type here
+			Change_user_type(user2);
 			break;
 		case 6:
 			system("CLS");
@@ -342,7 +357,7 @@ void Options_Admin(User &user1)
 	} while (Flag);
 }
 
-void Options_premium(User &user1)
+void Options_premium(User &user1, User &user2)
 {
 	int Choice;
 	bool Flag = true;
@@ -362,7 +377,10 @@ void Options_premium(User &user1)
 		switch (Choice)
 		{
 		case 1:
-			// user list
+			system("CLS");
+			PrintingUsersList();
+			cout << endl << endl << "       Press Enter to return" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 			break;
 		case 2:
 			system("CLS");
@@ -374,7 +392,9 @@ void Options_premium(User &user1)
 			break;
 		case 4:
 			system("CLS");
-			//  Change type with player here
+			Excahnge_Type_With_Player(user1, user2);
+			cout << endl << endl << "       Press Enter to return" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 			break;
 		case 5:
 			system("CLS");
@@ -401,4 +421,370 @@ void WatchUserWinLose()
 	Display_Statistics("War");
 	cout << endl << endl << "       Press Enter to return to options" << endl;
 	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+}
+void PrintingUsersList()
+{
+	ifstream users_in;
+	User temp;
+	users_in.open("user_data.txt");
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+	cout << "       \t     ******************** " << " U S E R S   L I S T  ********************" << endl << endl;
+	cout << endl;
+	while (!users_in.eof())
+	{
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		cout << "\t\t\t\t" << temp.name << " - ";
+		if (temp.if_manager)
+		{
+			cout << " Admin" << "\t\t\t\t" << endl;
+		}
+		else if (temp.if_premium)
+		{
+			cout << " Premium Player" << "\t\t\t" << endl;
+		}
+		else
+		{
+			cout << " Player" << "\t\t\t\t" << endl;
+		}
+		cout << endl;
+	}
+	users_in.close();
+}
+void WhatchLogins()
+{
+	ifstream users_in;
+	User temp;
+	users_in.open("user_data.txt");
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+	cout << "       \t     ******************** " << " L O G I N S  C O U N T S  ********************" << endl << endl;
+	cout << endl;
+	while (!users_in.eof())
+	{
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		cout << "\t\t\t" << temp.name << "\t-\t" << temp.logins << endl << endl;
+	}
+	users_in.close();
+	cout << endl << endl << "       Press Enter to return" << endl;
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+}
+void ResetUserStats()
+{
+	bool flag = false;
+	string name;
+	cout << "Connect Four Statistics : " << endl;
+	Display_Statistics("Connect Four");
+	cout << "Snakes and Ladders Statistics : " << endl;
+	Display_Statistics("Snakes and Ladders");
+	cout << "Cards War Statistics : " << endl;
+	Display_Statistics("War");
+	cout << endl;
+	do
+	{
+		cout << "\t\t enter the name of a player to reset his stats." << endl;
+		cin >> name;
+		if (Check_Name_Input(name))
+		{
+			flag = false;
+		}
+		else
+		{
+			cout << "\t\t Name Does not exist !" << endl;
+			flag = true;
+		}
+	} while (flag);
+	Master_Statistics_Reset(name);
+	ResetUserLogins(name);
+	cout << endl << endl << "\t\t Press Enter to return" << endl;
+	getchar();
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+}
+bool Check_Name_Input(string name)
+{
+	ifstream users_in;
+	User temp;
+	users_in.open("user_data.txt");
+	while (!users_in.eof())
+	{
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (name == temp.name)
+		{
+			users_in.close();
+			return true;
+		}
+	}
+	users_in.close();
+	return false;
+}
+bool Check_Name_Input_of_UserToPremium(string name)
+{
+	ifstream users_in;
+	User temp;
+	users_in.open("user_data.txt");
+	while (!users_in.eof())
+	{
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (name == temp.name && (temp.if_manager == 1 || temp.if_premium==1))
+		{
+			cout << "\t\t This user is not a player!" << endl;
+			users_in.close();
+			return false;
+		}
+		if (name == temp.name)
+		{
+			users_in.close();
+			return true;
+		}
+	}
+	users_in.close();
+	cout << "\t\t Name Does not exist !" << endl;
+	return false;
+}
+void ChangeUserToPremium(string name)
+{
+	ifstream users_in;
+	ofstream users_out;
+	User temp;
+	users_in.open("user_data.txt");
+	users_out.open("temp.txt");
+	while (!users_in.eof()) {
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (temp.name == name)
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << 1;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+		else
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << temp.if_premium;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+	}
+	users_in.close();
+	users_out.close();
+	remove("user_data.txt");
+	rename("temp.txt", "user_data.txt");
+}
+void ResetUserLogins(string name)
+{
+	ifstream users_in;
+	ofstream users_out;
+	User temp;
+	users_in.open("user_data.txt");
+	users_out.open("temp.txt");
+	while (!users_in.eof()) {
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (temp.name == name)
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << 0 << endl;
+			users_out << temp.if_manager << endl;
+			users_out << temp.if_premium;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+		else
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << temp.if_premium;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+	}
+	users_in.close();
+	users_out.close();
+	remove("user_data.txt");
+	rename("temp.txt", "user_data.txt");
+}
+void Change_user_type(User &user2)
+{
+	int choice;
+	bool Flag = true;
+	PrintingUsersList();
+	do
+	{
+		cout << endl << endl << "\t\t Press Enter your choice : " << endl
+			<< endl << "\t\t 1 - change player to premium" << endl
+			<< endl << "\t\t 2 - change player to admin" << endl
+			<< endl << "\t\t 3 - change premium player to player" << endl
+			<< endl << "\t\t 4 - return " << endl;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			UserToPremium(user2);
+			system("CLS");
+			PrintingUsersList();
+			break;
+		case 2:
+
+			break;
+		case 3:
+			PremiumToUser();
+			system("CLS");
+			PrintingUsersList();
+			break;
+		case 4:
+			Flag = false;
+			break;
+		default:
+			system("CLS");
+			cout << endl << endl << "\t\tWrong Choice. Choose Again" << endl << endl;
+			cout << "\t\tPress Enter to Continue" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+		}
+	} while (Flag);
+}
+
+void UserToPremium(User &user2)
+{
+	string name;
+	bool flag = true;
+	do
+	{
+		cout << "\t\t enter the name of a player." << endl;
+		cin >> name;
+		if (Check_Name_Input_of_UserToPremium(name))
+		{
+			flag = false;
+		}
+		else
+		{
+			flag = true;
+		}
+	} while (flag);
+	PremiumToUser();
+	if (user2.if_premium==1)
+	{
+		user2.if_premium = 0;
+	}
+	ChangeUserToPremium(name);
+	if (name == user2.name)
+	{
+		user2.if_premium = 1;
+	}
+}
+void PremiumToUser()
+{
+	ifstream users_in;
+	ofstream users_out;
+	User temp;
+	users_in.open("user_data.txt");
+	users_out.open("temp.txt");
+	while (!users_in.eof()) {
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (temp.if_premium)
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << 0;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+		else
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << temp.if_premium;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+	}
+	users_in.close();
+	users_out.close();
+	remove("user_data.txt");
+	rename("temp.txt", "user_data.txt");
+}
+void Excahnge_Type_With_Player(User &user1, User &user2)
+{
+	bool flag = false;
+	string name;
+	PrintingUsersList();
+	do
+	{
+		cout << "\t\t enter the name of a player." << endl;
+		cin >> name;
+		if (Check_Name_Input_of_UserToPremium(name))
+		{
+			flag = false;
+		}
+		else
+		{
+			flag = true;
+		}
+	} while (flag);
+	PremiumToUser();
+	if (user2.if_premium == 1)
+	{
+		user2.if_premium = 0;
+	}
+	if (user1.if_premium == 1)
+	{
+		user1.if_premium = 0;
+	}
+	ChangeUserToPremium(name);
+	if (name == user2.name)
+	{
+		user2.if_premium = 1;
+	}
+	if (name == user1.name)
+	{
+		user2.if_premium = 1;
+	}
+}
+
+void Pre_Lost(User &pre, User &NewPre)
+{
+	PremiumToUser();
+	if (pre.if_premium == 1)
+	{
+		pre.if_premium = 0;
+	}
+	ChangeUserToPremium(NewPre.name);
+	NewPre.if_premium = 1;
 }

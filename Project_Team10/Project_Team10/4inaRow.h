@@ -4,9 +4,12 @@
 #include <iostream>
 #include <stdlib.h>
 #include "Statistics.h"
+#include "MainManu.h"
 #define BoardLength 6
 #define Boardhwidth 7
 #define Win 4
+
+void Pre_Lost(User &pre, User &NewPre);
 
 typedef enum {
 	space = ' ', red = 'r', blue = 'b',stone='s'
@@ -17,6 +20,7 @@ typedef struct {
 	Cell **surface; // table view
 }Board;
 int UserChoice(User player,Board *board);
+
 bool PauseManu()
 {
 	int Choice;
@@ -55,12 +59,16 @@ int RandomCol() {
 	rand = rand % 7+1;
 	return rand;
 }
-void Winner_point(User Winner, User losser, int passed_turns)
+void Winner_point(User &Winner, User &losser, int passed_turns)
 {
 	int winner_points = 0;
 	winner_points = 1000 - (25 * passed_turns);
 	cout << "       with " << winner_points << " points" << endl << "       after " << passed_turns << " turns" << endl;
 	Set_Connect_Four_Statistics(Winner.name, losser.name);
+	if (losser.if_premium == 1)
+	{
+		Pre_Lost(losser, Winner);
+	}
 	// add update datas here
 }
 void PrintBoard(Board *board) //method for printing the board
