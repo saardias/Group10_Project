@@ -36,7 +36,7 @@ void WarGameWinner(User win, User looser) {
 void PlayWar(User U1, User U2, int num_of_turns = 26) {
 	/*this is the game*/
 	CardPackage pack;
-	int tmp, u1_wins_ctr = 0, u2_wins_ctr = 0, u1_sum = 0, u2_sum = 0;
+	int tmp, u1_wins_ctr = 0, u2_wins_ctr = 0, u1_sum = 0, u2_sum = 0, ctr_p_changes=3;
 	Card u1_card, u2_card;
 
 	// reset pack so the pack contain 4 cards from any type of card
@@ -74,7 +74,28 @@ void PlayWar(User U1, User U2, int num_of_turns = 26) {
 
 		}
 		u1_card.card_name = pack.Card_Package[tmp].card_name;
-		pack.Card_Package[tmp].num_of_card--;
+		if (U1.if_premium) {
+			cout << "\n\n" << U1.name << " you are a premium member \n do you want to draw another card?" << endl;
+			cout << "it will cost you "<<ctr_p_changes<<" points" << endl;
+			cout << "press 1 to draw card" << endl;
+			cout << "press 2 to pass" << endl;
+			int choice;
+			cin >> choice;
+			if (choice == 1) {
+				//U1 pull out card
+				ctr_p_changes--;
+				tmp = Random();
+				while (pack.Card_Package[tmp].num_of_card < 1 || pack.Card_Package[tmp].num_of_card>4)
+				{
+					//find legal card
+					tmp++;
+					tmp = tmp % 13;
+
+				}
+				if (u1_card.card_name < pack.Card_Package[tmp].card_name) { u1_card.card_name = pack.Card_Package[tmp].card_name; }
+			}
+		}
+		pack.Card_Package[u1_card.card_name-2].num_of_card--;////////////// is it -- the correct card?
 		u1_card.num_of_card = pack.Card_Package[tmp].num_of_card;
 		u1_sum += u1_card.card_name;
 		//ifpremium-need to do
@@ -102,10 +123,30 @@ void PlayWar(User U1, User U2, int num_of_turns = 26) {
 			tmp = tmp % 13;
 		}
 		u2_card.card_name = pack.Card_Package[tmp].card_name;
-		pack.Card_Package[tmp].num_of_card--;
+		if (U2.if_premium) {
+			cout << "\n\n" << U2.name << " you are a premium member \n do you want to draw another card?" << endl;
+			cout << "you can do it " << ctr_p_changes << " times in this game" << endl;
+			cout << "press 1 to draw card" << endl;
+			cout << "press 2 to pass" << endl;
+			int choice;
+			cin >> choice;
+			if (choice == 1) {
+				//U1 pull out card
+				ctr_p_changes--;
+				tmp = Random();
+				while (pack.Card_Package[tmp].num_of_card < 1 || pack.Card_Package[tmp].num_of_card>4)
+				{
+					//find legal card
+					tmp++;
+					tmp = tmp % 13;
+
+				}
+				if (u2_card.card_name < pack.Card_Package[tmp].card_name) { u2_card.card_name = pack.Card_Package[tmp].card_name; }
+			}
+		}
+
+		pack.Card_Package[u2_card.card_name-2].num_of_card--;
 		u2_card.num_of_card = pack.Card_Package[tmp].num_of_card;
-		u2_sum += u2_card.card_name;
-		//ifpremium-need to do
 		cout << U2.name << " card is:" << endl;
 		PrintCard(u2_card.card_name);
 		/******************END OF U2 TURN***********************************/
