@@ -12,7 +12,7 @@ void create_user(User& p1, User& p2);
 void get_user_data(string& user_name, long int& pass, bool& admin);
 //function for signing in
 bool sign_in(User& player) {
-	char choice;
+	string choice;
 	bool exists = 0, admin = 0, premium = 0, admin_temp, prem_temp, logged = false;
 	ifstream users_in;
 	ofstream users_out, temp_out, changed;
@@ -22,7 +22,7 @@ bool sign_in(User& player) {
 	users_in.open("user_data.txt", ios::in);
 	cout << "for sign-up press 1\nfor log-in press 2" << endl;
 	cin >> choice;
-	if (choice == '1') {
+	if (choice == "1") {
 		get_user_data(user_name, pass, admin);
 		if (users_in.peek() == std::ifstream::traits_type::eof()) { //if file is empty
 			users_out << user_name << "\n";
@@ -70,7 +70,7 @@ bool sign_in(User& player) {
 			return true;
 		}
 	}
-	else if (choice == '2') {
+	else if (choice == "2") {
 		get_user_data(user_name, pass, admin);
 		if (users_in.peek() == std::ifstream::traits_type::eof()) {
 			cout << "User doesn't exist!\n";
@@ -140,27 +140,62 @@ bool sign_in(User& player) {
 
 }
 
+void delete_player(string name) { //this deletes a player
+	ifstream users_in;
+	ofstream temp_out;
+	string temp_name;
+	long temp_pass, log_temp;
+	bool admin_temp, prem_temp, first = false;
+	users_in.open("user_data.txt", ios::in);
+	temp_out.open("temp_data.txt", ios::out | ios::app);
+	while (!users_in.eof()) {
+		users_in >> temp_name;
+		users_in >> temp_pass;
+		users_in >> log_temp;
+		users_in >> admin_temp;
+		users_in >> prem_temp;
+		if (name != temp_name) {
+			if (first == false) {
+				temp_out << temp_name << "\n";
+				first = true;
+			}
+			else {
+				temp_out << "\n";
+				temp_out << temp_name << "\n";
+			}
+			temp_out << temp_pass << "\n";
+			temp_out << log_temp << "\n";
+			temp_out << admin_temp << "\n";
+			temp_out << prem_temp;
+		}
+	}
+	users_in.close();
+	temp_out.close();
+	remove("user_data.txt");
+	rename("temp_data.txt", "user_data.txt");
+}
+
 void create_user(User& p1, User& p2) {
-	char choice;
+	string choice;
 	cout << "signing player 1 " << endl;
 	while (!sign_in(p1)) {}
 	do {
 		cout << "To play against a signed player, press 1\nTo play against guest-players press 2\n";
 		cin >> choice;
-		if (choice == '2') {
+		if (choice == "2") {
 			p2.if_manager = false;
 			p2.if_premium = false;
 			p2.name = "Guest";
 			p2.password = 0;
 			break;
 		}
-		else if (choice == '1') {
+		else if (choice == "1") {
 			cout << "signing player 2 " << endl;
 			while (!sign_in(p2)) {}
 		}
 		else
 			cout << "Wrong input!" << endl;
-	} while (choice != '1' && choice != '2');
+	} while (choice != "1" && choice != "2");
 }
 
 void get_user_data(string& user_name, long int& pass, bool& admin) {
