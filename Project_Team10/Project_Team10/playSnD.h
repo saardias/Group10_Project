@@ -40,12 +40,12 @@ bool PauseSnakes()
 }
 
 void snake_encounter(User player, int penalty, int &points, int &place) {
-	char choice;
+	string choice;
 	cout << player.name << " has encoutered a snake. To save yourself you must pay: " << penalty;
 	cout << ". You have: " << points << " points." << endl;
 	cout << "To save yourself press 1, to go down the snake press any other charachter." << endl;
 	cin >> choice;
-	if (choice == '1') {
+	if (choice == "1") {
 		if (points - penalty < 0) {
 			cout << "You dont have enough points to save yourself! You'll go down the snake." << endl;
 			place -= 10;
@@ -63,12 +63,12 @@ void snake_encounter(User player, int penalty, int &points, int &place) {
 }
 
 void ladder_encounter(User player, int penalty, int &points, int &place) {
-	char choice;
+	string choice;
 	cout << player.name << " has encoutered a ladder. To go up the ladder you must pay: " << penalty;
 	cout << ". You have: " << points << " points." << endl;
 	cout << "To go up press 1, to skip the ladder press any other charachter." << endl;
 	cin >> choice;
-	if (choice == '1') {
+	if (choice == "1") {
 		if (points - penalty < 0) {
 			cout << "You dont have enough points to save yourself! You'll skip the ladder." << endl;
 		}
@@ -93,13 +93,13 @@ void bonus_points(User player, int &points, int rand_bonus, int turn) {
 }
 
 void refresh_screen(SnakesBoard Board) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(1250));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1650));
 	system("CLS");
 	PrintSnakesBoard(Board);
 }
 
 void dice_placement(User player, int &place) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(150));
+	std::this_thread::sleep_for(std::chrono::milliseconds(60));
 	int dice = rand() % 6 + 1;
 	cout << player.name << " rolled " << dice << endl;
 	place += dice;
@@ -110,7 +110,7 @@ void dice_placement(User player, int &place) {
 void play_snakes_and_ladders(User& U1, User& U2) {
 	SnakesBoard Board = SetNewBoard();
 	int U1p, U2p, dice, penaltySnake1, penaltySnake2, penaltyLadder1, penaltyLadder2, rand1, rand2;
-	char choice;
+	string choice;
 	if (U1.if_premium == 1) {
 		U1p = 30;
 		penaltySnake1 = 5;
@@ -142,9 +142,9 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 		if (i % 2 != 0) {
 			cout << "It's " << U1.name << "'s turn." << endl;
 			bonus_points(U1, U1p, rand1, i);
-			cout << "Press 0 to pause the game. Press any other charachter to roll the dice." << endl; //pause menu here
+			cout << "Press 0 to pause the game. Press any other character to roll the dice." << endl; //pause menu here
 			cin >> choice;
-			if (choice == '0') {
+			if (choice == "0") {
 				bool to_exit = PauseSnakes();
 				if (to_exit == true) {
 					return;
@@ -156,14 +156,13 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 				}
 			}
 			else {
-
 				dice_placement(U1, Board.U1_place);
 				refresh_screen(Board);
 			}
 			if (Board.U1_place >= 100) {
 				cout << U1.name << " has won the match!" << endl;
 				cout << U1.name << " finished with " << U1p << " points." << endl;
-				cout << U1.name << " finished with " << U2p << " points." << endl;
+				cout << U2.name << " finished with " << U2p << " points." << endl;
 				Set_Snakes_And_Ladders_Statistics(U1.name, U2.name);
 				Set_Snakes_And_Ladders_Score_Board(U1.name, U1p);
 				if (U2.if_premium == true) {
@@ -185,9 +184,9 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 		else {
 			cout << "It's " << U2.name << "'s turn." << endl;
 			bonus_points(U2, U2p, rand2, i - 1);
-			cout << "Press 0 to pause the game. Press any other charachter to roll the dice." << endl; //pause menu here
+			cout << "Press 0 to pause the game. Press any other character to roll the dice." << endl; //pause menu here
 			cin >> choice;
-			if (choice == '0') {
+			if (choice == "0") {
 				bool to_exit = PauseSnakes();
 				if (to_exit == true) {
 					return;
@@ -198,12 +197,14 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 					refresh_screen(Board);
 				}
 			}
-			dice_placement(U2, Board.U2_place);
-			refresh_screen(Board);
+			else {
+				dice_placement(U2, Board.U2_place);
+				refresh_screen(Board);
+			}
 			if (Board.U2_place >= 100) {
 				cout << U2.name << " has won the match!" << endl;
 				cout << U1.name << " finished with " << U1p << " points." << endl;
-				cout << U1.name << " finished with " << U2p << " points." << endl;
+				cout << U2.name << " finished with " << U2p << " points." << endl;
 				Set_Snakes_And_Ladders_Statistics(U2.name, U1.name);
 				Set_Snakes_And_Ladders_Score_Board(U2.name, U2p);
 				if (U1.if_premium == true) {

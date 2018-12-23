@@ -1,5 +1,5 @@
 #define CRT_SECURE_NO_WARNINGS
-#define admin_pass 77766613
+#define admin_pass "77766613"
 
 #include <string>
 #include <iostream>
@@ -10,15 +10,15 @@ using namespace std;
 
 bool sign_in(User& player);
 void create_user(User& p1, User& p2);
-void get_user_data(string& user_name, long int& pass, bool& admin);
+void get_user_data(string& user_name, string& pass, bool& admin);
 //function for signing in
 bool sign_in(User& player) {
 	string choice;
 	bool exists = 0, admin = 0, premium = 0, admin_temp, prem_temp, logged = false;
 	ifstream users_in;
 	ofstream users_out, temp_out, changed;
-	string user_name, temp_name;
-	long int pass, temp_pass, log_temp;
+	string user_name, temp_name, pass, temp_pass;
+	unsigned long int log_temp;
 	users_out.open("user_data.txt", ios::out | ios::app);
 	users_in.open("user_data.txt", ios::in);
 	cout << "for sign-up press 1\nfor log-in press 2" << endl;
@@ -146,8 +146,8 @@ bool sign_in(User& player) {
 void delete_player(string name) { //this deletes a player
 	ifstream users_in;
 	ofstream temp_out;
-	string temp_name;
-	long temp_pass, log_temp;
+	string temp_pass, temp_name;
+	unsigned long log_temp;
 	bool admin_temp, prem_temp, first = false;
 	users_in.open("user_data.txt", ios::in);
 	temp_out.open("temp_data.txt", ios::out | ios::app);
@@ -178,11 +178,11 @@ void delete_player(string name) { //this deletes a player
 	rename("temp_data.txt", "user_data.txt");
 }
 
-void make_admin(string name) { //this deletes a player
+void make_admin(string name) { //this turns a player into an admin
 	ifstream users_in;
 	ofstream temp_out;
-	string temp_name;
-	long temp_pass, log_temp;
+	string temp_pass, temp_name;
+	unsigned long int log_temp;
 	bool admin_temp, prem_temp, first = false;
 	users_in.open("user_data.txt", ios::in);
 	temp_out.open("temp_data.txt", ios::out | ios::app);
@@ -221,7 +221,7 @@ void create_user(User& p1, User& p2) {
 			p2.if_manager = false;
 			p2.if_premium = false;
 			p2.name = "Guest";
-			p2.password = 0;
+			p2.password = "0";
 			break;
 		}
 		else if (choice == "1") {
@@ -233,7 +233,7 @@ void create_user(User& p1, User& p2) {
 	} while (choice != "1" && choice != "2");
 }
 
-void get_user_data(string& user_name, long int& pass, bool& admin) {
+void get_user_data(string& user_name, string& pass, bool& admin) {
 	cout << "Please enter name" << endl;
 	cin >> user_name;
 	cout << "Please enter password" << endl;

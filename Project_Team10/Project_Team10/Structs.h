@@ -20,7 +20,7 @@ struct User {
 	string name;
 	bool if_manager;
 	bool if_premium;
-	long password;
+	string password;
 	int logins;
 	int score;
 };
