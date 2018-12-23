@@ -216,10 +216,3 @@ void Display_Game_Score_Board(string Game){
 	cout << "\t\t|________________________________________________________|" << endl << endl << endl;
 
 }
-
-int main() {
-	Set_Cards_Score_Board("yana", 96);
-	Display_Game_Score_Board("Snakes and Ladders");
-	system("PAUSE");
-	return 0;
-}

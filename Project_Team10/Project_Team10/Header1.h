@@ -6,6 +6,7 @@
 #include"visuals.h"
 #include <cstdlib>
 #include "MainManu.h"
+#include "Statistics.h"
 
 using namespace std;
 #define _CRT_SECURE_NO_WARNINGS

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "Structs.h"
+#include "Statistics.h"
 using namespace std;
 
 bool sign_in(User& player);
@@ -35,6 +36,7 @@ bool sign_in(User& player) {
 			player.if_manager = admin;
 			users_out << premium;
 			player.if_premium = premium;
+			Data_Base_User_Additional(user_name);
 			users_in.close();
 			users_out.close();
 			return true;
@@ -46,7 +48,7 @@ bool sign_in(User& player) {
 				users_in >> log_temp;
 				users_in >> admin_temp;
 				users_in >> prem_temp;
-				
+
 				if (user_name == temp_name) {
 					cout << "Name already exists!\n";
 					users_in.close();
@@ -65,6 +67,7 @@ bool sign_in(User& player) {
 			player.if_manager = admin;
 			users_out << premium;
 			player.if_premium = premium;
+			Data_Base_User_Additional(user_name);
 			users_in.close();
 			users_out.close();
 			return true;
@@ -83,7 +86,7 @@ bool sign_in(User& player) {
 				users_in >> log_temp;
 				users_in >> admin_temp;
 				users_in >> prem_temp;
-				
+
 				if (user_name == temp_name && pass == temp_pass) {
 					player.if_manager = admin_temp;
 					player.if_premium = prem_temp;
@@ -102,7 +105,7 @@ bool sign_in(User& player) {
 			if (logged == true) {
 				users_in.seekg(0, ios::beg);
 				temp_out.open("temp_data.txt", ios::out | ios::app);
-				while (!users_in.eof()){
+				while (!users_in.eof()) {
 					users_in >> temp_name;
 					users_in >> temp_pass;
 					users_in >> log_temp;
@@ -168,6 +171,38 @@ void delete_player(string name) { //this deletes a player
 			temp_out << admin_temp << "\n";
 			temp_out << prem_temp;
 		}
+	}
+	users_in.close();
+	temp_out.close();
+	remove("user_data.txt");
+	rename("temp_data.txt", "user_data.txt");
+}
+
+void make_admin(string name) { //this deletes a player
+	ifstream users_in;
+	ofstream temp_out;
+	string temp_name;
+	long temp_pass, log_temp;
+	bool admin_temp, prem_temp, first = false;
+	users_in.open("user_data.txt", ios::in);
+	temp_out.open("temp_data.txt", ios::out | ios::app);
+	while (!users_in.eof()) {
+		users_in >> temp_name;
+		users_in >> temp_pass;
+		users_in >> log_temp;
+		users_in >> admin_temp;
+		users_in >> prem_temp;
+
+		temp_out << temp_name << "\n";
+		temp_out << temp_pass << "\n";
+		temp_out << log_temp << "\n";
+		if (name == temp_name)
+			temp_out << 1 << "\n";
+		else
+			temp_out << admin_temp << "\n";
+		temp_out << prem_temp;
+		if (users_in.peek() != std::ifstream::traits_type::eof())
+			temp_out << "\n";
 	}
 	users_in.close();
 	temp_out.close();
