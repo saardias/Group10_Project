@@ -1,3 +1,4 @@
+#pragma once
 #define CRT_SECURE_NO_WARNINGS
 #define admin_pass 77766613
 

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "Statistics.h"
 #include "MainManu.h"
+#include "ScoreBoard.h"
 #define BoardLength 6
 #define Boardhwidth 7
 #define Win 4
@@ -69,7 +70,7 @@ void Winner_point(User &Winner, User &losser, int passed_turns)
 	{
 		Pre_Lost(losser, Winner);
 	}
-	// add update datas here
+	Set_Connect_Four_Score_Board(Winner.name, winner_points);
 }
 void PrintBoard(Board *board) //method for printing the board
 {
