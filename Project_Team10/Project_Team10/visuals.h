@@ -48,7 +48,23 @@ using namespace std;
 
 void PrintCard(int num) {
 
-	if (num % 2 == 0) {
+	if (num  == 14) {
+		cout << "\n\t\t=================" << endl;
+
+		/*if (num < 10) {*/ cout << "\t\t||" << "A" << "   \t       ||" << endl; //}
+	//	else { cout << "\t\t||" << num << "   \t       ||" << endl; }
+		cout << "\t\t||   xx   xx   ||" << endl;
+		cout << "\t\t||  xxxx xxxx  ||" << endl;
+		cout << "\t\t||  xxxxxxxxx  ||" << endl;
+		cout << "\t\t||   xxxxxxx   ||" << endl;
+		cout << "\t\t||    xxxxx    ||" << endl;
+		cout << "\t\t||     xxx     ||" << endl;
+		cout << "\t\t||      x      ||" << endl;
+	/*	if (num < 10) {*/ cout << "\t\t||            " << "A" << "||" << endl; //}
+	//	else { cout << "\t\t||           " << num << "||" << endl; }
+		cout << "\t\t=================" << endl;
+	}
+	if (num % 2 == 0&& num != 14) {
 		cout << "\n\t\t=================" << endl;
 
 		if (num < 10) { cout << "\t\t||" << num << "   \t       ||" << endl; }
