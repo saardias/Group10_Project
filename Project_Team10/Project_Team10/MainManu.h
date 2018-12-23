@@ -2,12 +2,14 @@
 #include <iostream>
 #include <limits>
 #include <cstdlib>
+#include "1.Sign_in_modules.h"
 #include "Header1.h"
 #include "Structs.h"
 #include "Instructions.h"
 #include "4inaRow.h"
 #include "playSnD.h"
 #include "Statistics.h"
+#include "ScoreBoard.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
@@ -34,6 +36,7 @@ void Change_user_type(User &user2);
 void PremiumToUser();
 void Excahnge_Type_With_Player(User &user,User &user2);
 void Pre_Lost(User &pre, User &NewPre);
+void DeletePlayerFromData(User &user1, User &user2);
 
 void MainMenu(User user1, User user2)
 {
@@ -59,11 +62,15 @@ void MainMenu(User user1, User user2)
 			break;
 		case 2:
 			system("CLS");
-			// scoreboard here
+			Display_Game_Score_Board("Connect Four");
+			Display_Game_Score_Board("Snakes and Ladders");
+			Display_Game_Score_Board("War");
+			cout << "       Press Enter to return" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+
 			break;
 		case 3:
 			system("CLS");
-			// options here
 			if (user1.if_manager)
 			{
 				Options_Admin(user1, user2);
@@ -340,7 +347,7 @@ void Options_Admin(User &user1, User &user2)
 			break;
 		case 6:
 			system("CLS");
-			//  Delete user here
+			DeletePlayerFromData(user1,user2);
 			break;
 		case 7:
 			system("CLS");
@@ -488,9 +495,13 @@ void ResetUserStats()
 	cout << endl;
 	do
 	{
-		cout << "\t\t enter the name of a player to reset his stats." << endl;
+		cout << "\t\t enter the name of a player to reset his stats. 'exit' to return" << endl;
 		cin >> name;
-		if (Check_Name_Input(name))
+		if (name == "exit")
+		{
+			flag = false;
+		}
+		else if (Check_Name_Input(name))
 		{
 			flag = false;
 		}
@@ -787,4 +798,35 @@ void Pre_Lost(User &pre, User &NewPre)
 	}
 	ChangeUserToPremium(NewPre.name);
 	NewPre.if_premium = 1;
+}
+
+void DeletePlayerFromData(User &user1, User &user2)
+{
+	bool flag = false;
+	string name;
+	PrintingUsersList();
+	do
+	{
+		cout << "\t\t enter name of a player to delete from system . 'exit' to return" << endl;
+		cin >> name;
+		if (name == "exit")
+		{
+			flag = false;
+		}
+		else if (name == user1.name || name == user2.name)
+		{
+			cout << "\t\t Can't delete connected users !" << endl;
+			flag = true;
+		}
+		else if (Check_Name_Input(name))
+		{
+			delete_player(name);
+			flag = false;
+		}
+		else
+		{
+			cout << "\t\t Name Does not exist !" << endl;
+			flag = true;
+		}
+	}while (flag);
 }

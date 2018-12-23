@@ -5,9 +5,13 @@
 #include "Structs.h"
 #include"visuals.h"
 #include <cstdlib>
+#include "MainManu.h"
+#include "Statistics.h"
 
 using namespace std;
 #define _CRT_SECURE_NO_WARNINGS
+void Pre_Lost(User &pre, User &NewPre);
+
 // war
 int Random() {
 	//return random number 0<=rand<=12
@@ -17,23 +21,32 @@ int Random() {
 	rand = rand % 12;
 	return rand;
 }
-//test
-/*^^^^^^^^^^^^unfinished^^^^^^^^^^^*/
 void PrintPack(CardPackage pack) {//for tests
 	/*print all cards in package*/
 	for (int i = 0; i < 13; i++) {
 		cout << pack.Card_Package[i].num_of_card << " num of type " << pack.Card_Package[i].card_name << endl;
 	}
 }
-void OneRoundWinner(User win, User looser) {
+void OneRoundWinner(User &win, User &looser) {
 	cout << "winner of this round is: " << win.name << endl;
 	cout << looser.name << " you such a looser go home" << endl;
 }
-void WarGameWinner(User win, User looser) {
+void WarGameWinner(User &win, User &looser, int winner_points, int looser_points) {
+	cout << "\n\n\n========- GAME OVER -========" << endl;
+
 	cout << "\n\n and the big winner of the game is: " << win.name << endl;
+	cout << " winner points: " << winner_points << endl;
 	cout << looser.name << " go home you are stupid" << endl;
+	cout << " looser points: " << looser_points << endl;
+	cout << "====================================" << endl;
+
+	Set_Cards_Battle_Statistics(win.name, looser.name);
+
+	cout << "press enter to exit" << endl;
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+
 }
-void PlayWar(User U1, User U2, int num_of_turns = 26) {
+void PlayWar(User &U1, User &U2, int num_of_turns = 26) {
 	/*this is the game*/
 	CardPackage pack;
 	int tmp, u1_wins_ctr = 0, u2_wins_ctr = 0, u1_sum = 0, u2_sum = 0, ctr_p_changes=3;
@@ -95,7 +108,7 @@ void PlayWar(User U1, User U2, int num_of_turns = 26) {
 				if (u1_card.card_name < pack.Card_Package[tmp].card_name) { u1_card.card_name = pack.Card_Package[tmp].card_name; }
 			}
 		}
-		pack.Card_Package[u1_card.card_name-2].num_of_card--;////////////// is it -- the correct card?
+		pack.Card_Package[u1_card.card_name-2].num_of_card--;
 		u1_card.num_of_card = pack.Card_Package[tmp].num_of_card;
 		u1_sum += u1_card.card_name;
 		//ifpremium-need to do
@@ -147,6 +160,7 @@ void PlayWar(User U1, User U2, int num_of_turns = 26) {
 
 		pack.Card_Package[u2_card.card_name-2].num_of_card--;
 		u2_card.num_of_card = pack.Card_Package[tmp].num_of_card;
+		u2_sum += u2_card.card_name;
 		cout << U2.name << " card is:" << endl;
 		PrintCard(u2_card.card_name);
 		/******************END OF U2 TURN***********************************/
@@ -183,9 +197,9 @@ void PlayWar(User U1, User U2, int num_of_turns = 26) {
 		}
 	}
 	/*****WarGameWinner******/
-	if (u1_wins_ctr > u2_wins_ctr) { WarGameWinner(U1, U2); }
-	if (u1_wins_ctr < u2_wins_ctr) { WarGameWinner(U2, U1); }
+	if (u1_wins_ctr > u2_wins_ctr) { WarGameWinner(U1, U2, u1_wins_ctr, u2_wins_ctr); if (U2.if_premium) { Pre_Lost(U2, U1); } }
+	if (u1_wins_ctr < u2_wins_ctr) { WarGameWinner(U2, U1, u2_wins_ctr, u1_wins_ctr); if (U1.if_premium) { Pre_Lost(U1, U2); } }
 	if (u1_wins_ctr == u2_wins_ctr) { cout << "both of you are loosers" << endl; }//rare 
 
-	U2.name = tmp_u2_name;
+	if (u2_is_computer) { U2.name = tmp_u2_name; }
 }
