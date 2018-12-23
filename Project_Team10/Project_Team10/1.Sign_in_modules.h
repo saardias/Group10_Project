@@ -149,7 +149,7 @@ void delete_player(string name) { //this deletes a player
 	ofstream temp_out;
 	string temp_pass, temp_name;
 	unsigned long log_temp;
-	bool admin_temp, prem_temp, first = false;
+	bool admin_temp, prem_temp, first = false, deleted = false;
 	users_in.open("user_data.txt", ios::in);
 	temp_out.open("temp_data.txt", ios::out | ios::app);
 	while (!users_in.eof()) {
@@ -172,6 +172,13 @@ void delete_player(string name) { //this deletes a player
 			temp_out << admin_temp << "\n";
 			temp_out << prem_temp;
 		}
+		else {
+			cout << "Player Deleted!" << endl;
+			deleted = true;
+		}
+	}
+	if (deleted == false) {
+		cout << "User name doesn't exist." << endl;
 	}
 	users_in.close();
 	temp_out.close();
@@ -179,12 +186,12 @@ void delete_player(string name) { //this deletes a player
 	rename("temp_data.txt", "user_data.txt");
 }
 
-void make_admin(string name) { //this turns a player into an admin
+void make_admin(string name, User& p1, User& p2) { //this turns a player into an admin
 	ifstream users_in;
 	ofstream temp_out;
 	string temp_pass, temp_name;
 	unsigned long int log_temp;
-	bool admin_temp, prem_temp, first = false;
+	bool admin_temp, prem_temp, first = false, changed = false;
 	users_in.open("user_data.txt", ios::in);
 	temp_out.open("temp_data.txt", ios::out | ios::app);
 	while (!users_in.eof()) {
@@ -197,13 +204,23 @@ void make_admin(string name) { //this turns a player into an admin
 		temp_out << temp_name << "\n";
 		temp_out << temp_pass << "\n";
 		temp_out << log_temp << "\n";
-		if (name == temp_name)
+		if (name == temp_name) {
 			temp_out << 1 << "\n";
+			changed = true;
+			cout << "Player changed into admin" << endl;
+			if (p1.name == name)
+				p1.if_manager = true;
+			else if (p2.name == name)
+				p2.if_manager = true;
+		}
 		else
 			temp_out << admin_temp << "\n";
 		temp_out << prem_temp;
 		if (users_in.peek() != std::ifstream::traits_type::eof())
 			temp_out << "\n";
+	}
+	if (changed == false) {
+		cout << "User name doesn't exist." << endl;
 	}
 	users_in.close();
 	temp_out.close();

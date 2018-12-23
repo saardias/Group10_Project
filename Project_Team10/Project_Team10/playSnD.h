@@ -140,7 +140,11 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 	for (int i = 1; ; i++) {
 
 		if (i % 2 != 0) {
-			cout << "It's " << U1.name << "'s turn." << endl;
+			cout << "It's ";
+			ChangeColor(LIGHTBLUE);
+			cout << U1.name;
+			ChangeColor(LIGHTGREY);
+			cout << "'s turn." << endl;
 			bonus_points(U1, U1p, rand1, i);
 			cout << "Press 0 to pause the game. Press any other character to roll the dice." << endl; //pause menu here
 			cin >> choice;
@@ -168,7 +172,7 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 				if (U2.if_premium == true) {
 					Pre_Lost(U2, U1);
 				}
-				cout << "Press any charachter to exit" << endl;
+				cout << "Press any character to exit" << endl;
 				cin >> choice;
 				break;
 			}
@@ -182,7 +186,11 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 			}
 		}
 		else {
-			cout << "It's " << U2.name << "'s turn." << endl;
+			cout << "It's ";
+			ChangeColor(LIGHTRED);
+			cout << U2.name;
+			ChangeColor(LIGHTGREY);
+			cout << "'s turn." << endl;
 			bonus_points(U2, U2p, rand2, i - 1);
 			cout << "Press 0 to pause the game. Press any other character to roll the dice." << endl; //pause menu here
 			cin >> choice;
@@ -210,7 +218,7 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 				if (U1.if_premium == true) {
 					Pre_Lost(U1, U2);
 				}
-				cout << "Press any charachter to exit" << endl;
+				cout << "Press any character to exit" << endl;
 				cin >> choice;
 				break;
 			}
