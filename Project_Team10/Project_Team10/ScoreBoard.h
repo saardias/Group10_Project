@@ -1,3 +1,4 @@
+#pragma once
 #define CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <fstream>
@@ -28,18 +29,13 @@ void Set_Snakes_And_Ladders_Score_Board(string name, int score) {
 		}
 	}
 	for (int i = 0; i < 5; i++) {
-		if ((Score > temp[i] && name != Temp[0] && name != Temp[1] && name != Temp[2] && name != Temp[3] && name != Temp[4]) || (flag1 == true)) {
+		if (Score > temp[i]) {
 			BubbleSort = temp[i];
 			temp[i] = Score;
 			Score = BubbleSort;
 			Holder = Temp[i];
 			Temp[i] = Name;
 			Name = Holder;
-			flag1 = true;
-		}
-		else if (Score > temp[i] && Temp[i] == name) {
-			temp[i] = Score;
-			break;
 		}
 	}
 	for (int i = 0; i < 5; i++) {
@@ -76,18 +72,13 @@ void Set_Connect_Four_Score_Board(string name, int score) {
 		}
 	}
 	for (int i = 0; i < 5; i++) {
-		if ((Score > temp[i] && name != Temp[0] && name != Temp[1] && name != Temp[2] && name != Temp[3] && name != Temp[4]) || (flag1 == true)) {
+		if (Score > temp[i]) {
 			BubbleSort = temp[i];
 			temp[i] = Score;
 			Score = BubbleSort;
 			Holder = Temp[i];
 			Temp[i] = Name;
 			Name = Holder;
-			flag1 = true;
-		}
-		else if (Score > temp[i] && Temp[i] == name) {
-			temp[i] = Score;
-			break;
 		}
 	}
 	for (int i = 0; i < 5; i++) {
@@ -124,18 +115,13 @@ void Set_Cards_Score_Board(string name, int score) {
 		}
 	}
 	for (int i = 0; i < 5; i++) {
-		if ((Score > temp[i] && name != Temp[0] && name != Temp[1] && name != Temp[2] && name != Temp[3] && name != Temp[4])||(flag1 == true)) {
+		if (Score > temp[i]) {
 			BubbleSort = temp[i];
 			temp[i] = Score;
 			Score = BubbleSort;
 			Holder = Temp[i];
 			Temp[i] = Name;
 			Name = Holder;
-			flag1 = true;
-		}
-		else if (Score > temp[i] && Temp[i] == name) {
-			temp[i] = Score;
-			break;
 		}
 	}
 	for (int i = 0; i < 5; i++) {
