@@ -21,7 +21,7 @@ typedef struct {
 	int length = BoardLength, width = Boardhwidth; // size
 	Cell **surface; // table view
 }Board;
-int UserChoice(User player,Board *board);
+int UserChoice(User player,Board *board, bool color_set);
 
 bool PauseManu()
 {
@@ -289,7 +289,7 @@ void PlayForInARow(User &player1, User &player2) {
 	for (i = 0; i < row*col; i++) {
 		if (k % 2 == 0) {
 			do {
-				placement = UserChoice(player1, board);
+				placement = UserChoice(player1, board, false);
 				if (placement == 0)
 				{
 					flag = true;
@@ -317,7 +317,7 @@ void PlayForInARow(User &player1, User &player2) {
 				if (Tothrow == 1)
 				{
 					cout << player1.name << " Where would you like to throw a stone? [1-" << col << "]" << endl;
-					placement = UserChoice(player1, board);
+					placement = UserChoice(player1, board, false);
 					if (placement == 0)
 					{
 						flag = true;
@@ -331,7 +331,7 @@ void PlayForInARow(User &player1, User &player2) {
 		}
 		if (k % 2 != 0) {
 			do {
-				placement = UserChoice(player2, board);
+				placement = UserChoice(player2, board, true);
 				if (placement == 0)
 				{
 					flag = true;
@@ -359,7 +359,7 @@ void PlayForInARow(User &player1, User &player2) {
 				if (Tothrow == 1)
 				{
 					cout << player2.name << " Where would you like to throw a stone? [1-" << col << "]" << endl;
-					placement = UserChoice(player1, board);
+					placement = UserChoice(player1, board, true);
 					if (placement == 0)
 					{
 						flag = true;
@@ -390,13 +390,23 @@ void PlayForInARow(User &player1, User &player2) {
 	getchar();
 	delete board;
 }
-int UserChoice(User player, Board *board)
+int UserChoice(User player, Board *board, bool color_set)
 {
 	bool flag = true,flag2=false;
 	int choice;
 	do
 	{
-		cout << player.name << " Please enter your - input! [1-7]  0 - Pause:";
+		if (color_set == false) {
+			ChangeColor(LIGHTRED);
+			cout << player.name;
+			ChangeColor(LIGHTGREY);
+		}
+		else {
+			ChangeColor(LIGHTBLUE);
+			cout << player.name;
+			ChangeColor(LIGHTGREY);
+		}
+		cout << " Please enter your - input! [1-7]  0 - Pause:";
 		cin >> choice;
 		if (choice == 0)
 		{
