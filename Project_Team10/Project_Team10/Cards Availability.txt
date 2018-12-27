@@ -1,2 +1,2 @@
-Availability :0
-6
+Availability :1
+7

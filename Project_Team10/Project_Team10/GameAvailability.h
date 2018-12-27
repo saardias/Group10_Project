@@ -11,7 +11,7 @@ void Display_Game_Run_Count(string Game) {
 		Display.open("Connect Four Availability.txt");
 		while (getline(Display, Claim)) {
 			if (flag == true) {
-				cout << "Game Connect Four has ran " << Claim << " Times." << endl;
+				cout << "\t Connect Four has ran " << Claim << " Times." << endl;
 				break;
 			}
 			if (Claim[0] == 'A') {
@@ -24,7 +24,7 @@ void Display_Game_Run_Count(string Game) {
 		Display.open("Cards Availability.txt");
 		while (getline(Display, Claim)) {
 			if (flag == true) {
-				cout << "Game Cards Battle has ran " << Claim << " Times." << endl;
+				cout << "\t Cards Wars has ran " << Claim << " Times." << endl;
 				break;
 			}
 			if (Claim[0] == 'A') {
@@ -37,7 +37,7 @@ void Display_Game_Run_Count(string Game) {
 		Display.open("Snakes and Ladders Availability.txt");
 		while (getline(Display, Claim)) {
 			if (flag == true) {
-				cout << "Game Snakes and Ladders has ran " << Claim << " Times." << endl;
+				cout << "\t Snakes and Ladders has ran " << Claim << " Times." << endl;
 				break;
 			}
 			if (Claim[0] == 'A') {
@@ -60,6 +60,7 @@ void Set_Game_Run_Count(string Game) {
 			if (flag == true) {
 				for(int i=0; i< sizeof(Claim); i++){
 					Claim[i] += 1;
+					break;
 				}
 				Set << Claim << endl;
 				break;
@@ -80,6 +81,7 @@ void Set_Game_Run_Count(string Game) {
 			if (flag == true) {
 				for (int i = 0; i < sizeof(Claim); i++) {
 					Claim[i] += 1;
+					break;
 				}
 				Set << Claim << endl;
 				break;

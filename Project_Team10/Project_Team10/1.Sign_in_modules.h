@@ -7,8 +7,10 @@
 #include <fstream>
 #include "Structs.h"
 #include "Statistics.h"
+#include "MainManu.h"
 using namespace std;
 
+void PremiumToUser();
 bool sign_in(User& player);
 void create_user(User& p1, User& p2);
 void get_user_data(string& user_name, string& pass, bool& admin);
@@ -205,6 +207,8 @@ void make_admin(string name, User& p1, User& p2) { //this turns a player into an
 		temp_out << temp_pass << "\n";
 		temp_out << log_temp << "\n";
 		if (name == temp_name) {
+			if (prem_temp == 1)
+				prem_temp = 0;
 			temp_out << 1 << "\n";
 			changed = true;
 			cout << "Player changed into admin" << endl;
