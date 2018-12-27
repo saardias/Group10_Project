@@ -1,5 +1,5 @@
 eli
-Win rate :0
+Win rate :1
 Lose rate :0
 saar
 Win rate :0

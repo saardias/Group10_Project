@@ -3,6 +3,51 @@
 #include <fstream>
 using namespace std;
 
+void Display_Game_Run_Count(string Game) {
+	bool flag = false;
+	ifstream Display;
+	string Claim;
+	if (Game == "Connect Four") {
+		Display.open("Connect Four Availability.txt");
+		while (getline(Display, Claim)) {
+			if (flag == true) {
+				cout << "Game Connect Four has ran " << Claim << " Times." << endl;
+				break;
+			}
+			if (Claim[0] == 'A') {
+				flag = true;
+			}
+		}
+		Display.close();
+	}
+	if (Game == "War") {
+		Display.open("Cards Availability.txt");
+		while (getline(Display, Claim)) {
+			if (flag == true) {
+				cout << "Game Cards Battle has ran " << Claim << " Times." << endl;
+				break;
+			}
+			if (Claim[0] == 'A') {
+				flag = true;
+			}
+		}
+		Display.close();
+	}
+	if (Game == "Snakes and Ladders") {
+		Display.open("Snakes and Ladders Availability.txt");
+		while (getline(Display, Claim)) {
+			if (flag == true) {
+				cout << "Game Snakes and Ladders has ran " << Claim << " Times." << endl;
+				break;
+			}
+			if (Claim[0] == 'A') {
+				flag = true;
+			}
+		}
+		Display.close();
+	}
+}
+
 void Set_Game_Run_Count(string Game) {
 	bool flag = false;
 	ifstream Check;

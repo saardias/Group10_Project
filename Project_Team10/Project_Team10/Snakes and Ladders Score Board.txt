@@ -2,9 +2,9 @@ eli
 120
 david
 100
+eli
+85
 saar
 70
 nitay
 60
-yana
-20
