@@ -3,13 +3,12 @@
 //#include <string>
 #include <fstream>
 #include "Structs.h"
-#include "MainManu.h"
 using namespace std;
-
 
 //the function below updates the new statistic records of the winner and the defeated users especially made for Snakes and Ladders game.
 void Set_Snakes_And_Ladders_Statistics(string Winner,string Looser) { 
 	bool flag1 = false, flag2 = false;
+	int number = 0;
 	ifstream Set;
 	ofstream Update;
 	string Claim;
@@ -22,8 +21,18 @@ void Set_Snakes_And_Ladders_Statistics(string Winner,string Looser) {
 		else if (flag1 == true) { // this if condition will change the Win rate Statistics for the winner user in this condition.//
 			for (int i = 0; i < sizeof(Claim); i++) {
 				if ((Claim[0] == 'W' && Claim[i] == ':') && (Claim[i + 1] > 47 && Claim[i + 1] < 58)) {
-					Claim[i + 1] += 1;
-					Update << Claim << endl;
+					for (int j = i + 1; Claim[j] != '\0'; j++) {
+						number *= 10;
+						number += Claim[j] - 48;
+						if (Claim[j + 1] == '\0') {
+							number += 1;
+						}
+						else {
+							continue;
+						}
+					}
+					Update << "Win rate :" << number << endl;
+					number = 0;
 					break;
 				}
 			}
@@ -32,8 +41,18 @@ void Set_Snakes_And_Ladders_Statistics(string Winner,string Looser) {
 		else if (flag2 == true) { // this if condition will change the Lose rate Statistics for the loosing user in this condition. //
 			for (int i = 0; i < sizeof(Claim); i++) {
 				if ((Claim[0] == 'L' && Claim[i] == ':') && (Claim[i + 1] > 47 && Claim[i + 1] < 58)) {
-					Claim[i + 1] += 1;
-					Update << Claim << endl;
+					for (int j = i + 1; Claim[j] != '\0'; j++) {
+						number *= 10;
+						number += Claim[j] - 48;
+						if (Claim[j + 1] == '\0') {
+							number += 1;
+						}
+						else {
+							continue;
+						}
+					}
+					Update << "Lose rate :" << number << endl;
+					number = 0;
 					break;
 				}
 			}
@@ -55,6 +74,7 @@ void Set_Snakes_And_Ladders_Statistics(string Winner,string Looser) {
 //the function below updates the new statistic records of the winner and the defeated users especially made for Connect Four game.
 void Set_Connect_Four_Statistics(string Winner, string Looser) {
 	bool flag1 = false, flag2 = false;
+	int number = 0;
 	ifstream Set;
 	ofstream Update;
 	string Claim;
@@ -67,8 +87,18 @@ void Set_Connect_Four_Statistics(string Winner, string Looser) {
 		else if (flag1 == true) { // this if condition will change the Win rate Statistics for the winner user in this condition.//
 			for (int i = 0; i < sizeof(Claim); i++) {
 				if ((Claim[0] == 'W' && Claim[i] == ':') && (Claim[i + 1] > 47 && Claim[i + 1] < 58)) {
-					Claim[i + 1] += 1;
-					Update << Claim << endl;
+					for (int j = i + 1; Claim[j] != '\0'; j++) {
+						number *= 10;
+						number += Claim[j] - 48;
+						if (Claim[j + 1] == '\0') {
+							number += 1;
+						}
+						else {
+							continue;
+						}
+					}
+					Update << "Win rate :" << number << endl;
+					number = 0;
 					break;
 				}
 			}
@@ -77,8 +107,18 @@ void Set_Connect_Four_Statistics(string Winner, string Looser) {
 		else if (flag2 == true) { // this if condition will change the Lose rate Statistics for the loosing user in this condition. //
 			for (int i = 0; i < sizeof(Claim); i++) {
 				if ((Claim[0] == 'L' && Claim[i] == ':') && (Claim[i + 1] > 47 && Claim[i + 1] < 58)) {
-					Claim[i + 1] += 1;
-					Update << Claim << endl;
+					for (int j = i + 1; Claim[j] != '\0'; j++) {
+						number *= 10;
+						number += Claim[j] - 48;
+						if (Claim[j + 1] == '\0') {
+							number += 1;
+						}
+						else {
+							continue;
+						}
+					}
+					Update << "Lose rate :" << number << endl;
+					number = 0;
 					break;
 				}
 			}
@@ -100,6 +140,7 @@ void Set_Connect_Four_Statistics(string Winner, string Looser) {
 //the function below updates the new statistic records of the winner and the defeated users especially made for Cards game.
 void Set_Cards_Battle_Statistics(string Winner, string Looser) {
 	bool flag1 = false, flag2 = false;
+	int number = 0;
 	ifstream Set;
 	ofstream Update;
 	string Claim;
@@ -112,8 +153,18 @@ void Set_Cards_Battle_Statistics(string Winner, string Looser) {
 		else if (flag1 == true) { // this if condition will change the Win rate Statistics for the winner user in this condition.//
 			for (int i = 0; i < sizeof(Claim); i++) {
 				if((Claim[0] == 'W' && Claim[i] == ':') && (Claim[i + 1] > 47 && Claim[i + 1] < 58)){
-					Claim[i + 1] += 1;
-					Update << Claim << endl;
+					for (int j = i + 1; Claim[j] != '\0'; j++) {
+						number *= 10;
+						number += Claim[j]-48;
+						if (Claim[j + 1] == '\0') {
+							number += 1;
+						}
+						else {
+							continue;
+						}
+					}
+					Update <<"Win rate :" << number << endl;
+					number = 0;
 					break;
 				}
 			}
@@ -122,8 +173,18 @@ void Set_Cards_Battle_Statistics(string Winner, string Looser) {
 		else if (flag2 == true) { // this if condition will change the Lose rate Statistics for the loosing user in this condition. //
 			for (int i = 0; i < sizeof(Claim); i++) {
 				if ((Claim[0] == 'L' && Claim[i] == ':') && (Claim[i + 1] > 47 && Claim[i + 1] < 58)) {
-					Claim[i + 1] += 1;
-					Update << Claim << endl;
+					for (int j = i + 1; Claim[j] != '\0'; j++) {
+						number *= 10;
+						number += Claim[j] - 48;
+						if (Claim[j + 1] == '\0') {
+							number += 1;
+						}
+						else {
+							continue;
+						}
+					}
+					Update << "Lose rate :" << number << endl;
+					number = 0;
 					break;
 				}
 			}
@@ -443,7 +504,5 @@ void Display_Personal_User_Statistics(string User) {
 	Display.close();
 	cout << "\t\t|\t\t\t\t\t\t\t |";
 	cout << endl << "\t\t|________________________________________________________|" << endl << endl << endl;
-	cout << endl << endl << "       Press Enter to return to the Main menu" << endl;
-	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+	
 }
-

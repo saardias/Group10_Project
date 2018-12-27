@@ -11,7 +11,7 @@ void Display_Game_Run_Count(string Game) {
 		Display.open("Connect Four Availability.txt");
 		while (getline(Display, Claim)) {
 			if (flag == true) {
-				cout << "\t Connect Four has ran " << Claim << " Times." << endl;
+				cout << "Game Connect Four has ran " << Claim << " Times." << endl;
 				break;
 			}
 			if (Claim[0] == 'A') {
@@ -24,7 +24,7 @@ void Display_Game_Run_Count(string Game) {
 		Display.open("Cards Availability.txt");
 		while (getline(Display, Claim)) {
 			if (flag == true) {
-				cout << "\t Cards Wars has ran " << Claim << " Times." << endl;
+				cout << "Game Cards Battle has ran " << Claim << " Times." << endl;
 				break;
 			}
 			if (Claim[0] == 'A') {
@@ -37,7 +37,7 @@ void Display_Game_Run_Count(string Game) {
 		Display.open("Snakes and Ladders Availability.txt");
 		while (getline(Display, Claim)) {
 			if (flag == true) {
-				cout << "\t Snakes and Ladders has ran " << Claim << " Times." << endl;
+				cout << "Game Snakes and Ladders has ran " << Claim << " Times." << endl;
 				break;
 			}
 			if (Claim[0] == 'A') {
@@ -50,26 +50,17 @@ void Display_Game_Run_Count(string Game) {
 
 void Set_Game_Run_Count(string Game) {
 	bool flag = false;
+	int number = 0;
 	ifstream Check;
 	ofstream Set;
 	string Claim;
 	Set.open("temp.txt");
 	if (Game == "Connect Four") {
 		Check.open("Connect Four Availability.txt");
-		while (getline(Check, Claim)) {
-			if (flag == true) {
-				for(int i=0; i< sizeof(Claim); i++){
-					Claim[i] += 1;
-					break;
-				}
-				Set << Claim << endl;
-				break;
-			}
-			if (Claim[0] == 'A') {
-				Set << Claim << endl;
-				flag = true;
-			}
-		}
+		getline(Check, Claim);
+		Check >> number;
+		number += 1;
+		Set << Claim << endl << number << endl;
 		Set.close();
 		Check.close();
 		remove("Connect Four Availability.txt");
@@ -77,20 +68,10 @@ void Set_Game_Run_Count(string Game) {
 	}
 	else if (Game == "Snakes and Ladders") {
 		Check.open("Snakes and Ladders Availability.txt");
-		while (getline(Check, Claim)) {
-			if (flag == true) {
-				for (int i = 0; i < sizeof(Claim); i++) {
-					Claim[i] += 1;
-					break;
-				}
-				Set << Claim << endl;
-				break;
-			}
-			if (Claim[0] == 'A') {
-				Set << Claim << endl;
-				flag = true;
-			}
-		}
+		getline(Check, Claim);
+		Check >> number;
+		number += 1;
+		Set << Claim << endl << number << endl;
 		Set.close();
 		Check.close();
 		remove("Snakes and Ladders Availability.txt");
@@ -98,20 +79,10 @@ void Set_Game_Run_Count(string Game) {
 	}
 	else if (Game == "War") {
 		Check.open("Cards Availability.txt");
-		while (getline(Check, Claim)) {
-			if (flag == true) {
-				for (int i = 0; i < sizeof(Claim); i++) {
-					Claim[i] += 1;
-					break;
-				}
-				Set << Claim << endl;
-				break;
-			}
-			if (Claim[0] == 'A') {
-				Set << Claim << endl;
-				flag = true;
-			}
-		}
+		getline(Check, Claim);
+		Check >> number;
+		number += 1;
+		Set << Claim << endl << number << endl;
 		Set.close();
 		Check.close();
 		remove("Cards Availability.txt");
