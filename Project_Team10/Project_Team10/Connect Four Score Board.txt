@@ -1,10 +1,10 @@
-eli
-120
 david
-925
+150
+eli
+140
 saar
-925
+130
 nitay
-60
+120
 yana
-20
+6

@@ -9,6 +9,7 @@
 #define BoardLength 6
 #define Boardhwidth 7
 #define Win 4
+#define col_div -999
 
 void Pre_Lost(User &pre, User &NewPre);
 
@@ -133,6 +134,7 @@ int PlacePlayer(Cell p, int x, Board *board) {
 			return i;
 		}
 	}
+	return col_div;
 }
 void PlaceStone(int x, Board *board)
 {
@@ -286,14 +288,23 @@ void PlayForInARow(User &player1, User &player2) {
 
 	for (i = 0; i < row*col; i++) {
 		if (k % 2 == 0) {
-			placement = UserChoice(player1, board);
-			if (placement == 0)
-			{
-				flag = true;
-				break;
-			}
-			temp = PlacePlayer(red, placement, board);
-			PrintBoard(board);
+			do {
+				placement = UserChoice(player1, board);
+				if (placement == 0)
+				{
+					flag = true;
+					break;
+				}
+				temp = PlacePlayer(red, placement, board);
+				if (temp == col_div) {
+					PrintBoard(board);
+					cout << "Not enough space in column. Please enter another column number." << endl;
+				}
+				else {
+					PrintBoard(board);
+					break;
+				}
+			} while (temp == col_div);
 			if (i >= 6 && temp > 0 && Winner(temp, placement, red, board, player1, player2, passed_turns) == true) {
 				cout << endl << endl << "       \nPress Enter continue" << endl;
 				cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
@@ -319,14 +330,23 @@ void PlayForInARow(User &player1, User &player2) {
 			}
 		}
 		if (k % 2 != 0) {
-			placement = UserChoice(player2, board);
-			if (placement == 0)
-			{
-				flag = true;
-				break;
-			}
-			temp = PlacePlayer(blue, placement, board);
-			PrintBoard(board);
+			do {
+				placement = UserChoice(player2, board);
+				if (placement == 0)
+				{
+					flag = true;
+					break;
+				}
+				temp = PlacePlayer(blue, placement, board);
+				if (temp == col_div) {
+					PrintBoard(board);
+					cout << "Not enough space in column. Please enter another column number." << endl;
+				}
+				else {
+					PrintBoard(board);
+					break;
+				}
+			} while (temp == col_div);
 			if (i >= 6 && temp > 0 && Winner(temp, placement, blue, board, player1, player2, passed_turns) == true) {
 				cout << endl << endl << "       \nPress Enter continue" << endl;
 				cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
@@ -388,7 +408,8 @@ int UserChoice(User player, Board *board)
 		}
 		else if (choice > 7 || choice <0)
 		{
-			cout << " Board-size deviation! Please re-enter your input " << endl;
+			cout << "Board-size deviation! Please re-enter your input " << endl;
+			std::this_thread::sleep_for(std::chrono::milliseconds(2600));
 		}
 		else
 		{
