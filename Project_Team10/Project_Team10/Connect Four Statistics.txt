@@ -5,5 +5,5 @@ saar
 Win rate :0
 Lose rate :0
 david
-Win rate :0
+Win rate :5
 Lose rate :0

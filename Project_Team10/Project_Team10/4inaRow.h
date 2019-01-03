@@ -36,7 +36,6 @@ bool PauseManu()
 			"        2 ) Exit" << endl << endl <<
 			"       ###################################" << endl;
 		cin >> Choice;
-		getchar();
 		switch (Choice)
 		{
 		case 1:
@@ -272,7 +271,7 @@ void PlayForInARow(User &player1, User &player2) {
 	Board *board = new Board;
 	int passed_turns = 0;
 	int StoneCounter = 0;
-	int k = 0, i, placement, temp, row, col;
+	int placement, temp, row, col;
 	int Tothrow, throwed=0;
 	bool flag=false;
 	row = board->length;
@@ -285,9 +284,9 @@ void PlayForInARow(User &player1, User &player2) {
 		}
 	}
 	PrintBoard(board);
-
-	for (i = 0; i < row*col; i++) {
-		if (k % 2 == 0) {
+	int i = 0;
+	for (int j = 0; i < row*col; j++) {
+		if (j % 2 == 0) {
 			do {
 				placement = UserChoice(player1, board, false);
 				if (placement == 0)
@@ -301,10 +300,13 @@ void PlayForInARow(User &player1, User &player2) {
 					cout << "Not enough space in column. Please enter another column number." << endl;
 				}
 				else {
+					i++;
 					PrintBoard(board);
 					break;
 				}
 			} while (temp == col_div);
+			if (flag == true)
+				break;
 			if (i >= 6 && temp > 0 && Winner(temp, placement, red, board, player1, player2, passed_turns) == true) {
 				cout << endl << endl << "       \nPress Enter continue" << endl;
 				cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
@@ -323,13 +325,16 @@ void PlayForInARow(User &player1, User &player2) {
 						flag = true;
 						break;
 					}
+					if (flag == true)
+						break;
 					PlaceStone(placement, board);
 					throwed++;
+					i++;
 					PrintBoard(board);
 				}
 			}
 		}
-		if (k % 2 != 0) {
+		if (j % 2 != 0) {
 			do {
 				placement = UserChoice(player2, board, true);
 				if (placement == 0)
@@ -343,10 +348,13 @@ void PlayForInARow(User &player1, User &player2) {
 					cout << "Not enough space in column. Please enter another column number." << endl;
 				}
 				else {
+					i++;
 					PrintBoard(board);
 					break;
 				}
 			} while (temp == col_div);
+			if (flag == true)
+				break;
 			if (i >= 6 && temp > 0 && Winner(temp, placement, blue, board, player1, player2, passed_turns) == true) {
 				cout << endl << endl << "       \nPress Enter continue" << endl;
 				cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
@@ -365,8 +373,11 @@ void PlayForInARow(User &player1, User &player2) {
 						flag = true;
 						break;
 					}
+					if (flag == true)
+						break;
 					PlaceStone(placement, board);
 					throwed++;
+					i++;
 					PrintBoard(board);
 				}
 			}
@@ -376,10 +387,11 @@ void PlayForInARow(User &player1, User &player2) {
 		if (StoneCounter == 3)
 		{
 			placement = RandomCol();
-			PlacePlayer(stone, placement, board);
+			temp = PlacePlayer(stone, placement, board);
+			if (temp != col_div)
+				i++;
 			StoneCounter = 0;
 		}
-		k++;
 	} // this loop running the Connect Four game
 	if (i == row * col && flag==false) {
 		cout << " Draw! " << endl;
