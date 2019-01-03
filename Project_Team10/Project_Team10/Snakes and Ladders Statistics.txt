@@ -1,9 +1,9 @@
 eli
-Win rate :1
+Win rate :0
 Lose rate :0
 saar
 Win rate :0
-Lose rate :1
+Lose rate :0
 david
-Win rate :1
+Win rate :0
 Lose rate :0

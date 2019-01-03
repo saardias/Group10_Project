@@ -327,6 +327,8 @@ void Options_player(User &user1)
 		case 1:
 			system("CLS");
 			Display_Personal_User_Statistics(user1.name);
+			cout << endl << endl << "       Press Enter to return." << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 			break;
 		case 2:
 			system("CLS");

@@ -413,6 +413,7 @@ int UserChoice(User player, Board *board, bool color_set)
 			flag2 = PauseManu();
 			if (flag2)
 			{
+				flag = false;
 				break;
 			}
 		}
