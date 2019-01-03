@@ -181,7 +181,7 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 				refresh_screen(Board);
 			}
 			else if (Board.U1_place == Board.lader1 || Board.U1_place == Board.lader2 || Board.U1_place == Board.lader3 || Board.U1_place == Board.lader4 || Board.U1_place == Board.lader5) {
-				ladder_encounter(U1, penaltySnake1, U1p, Board.U1_place);
+				ladder_encounter(U1, penaltyLadder1, U1p, Board.U1_place);
 				refresh_screen(Board);
 			}
 		}
@@ -227,7 +227,7 @@ void play_snakes_and_ladders(User& U1, User& U2) {
 				refresh_screen(Board);
 			}
 			else if (Board.U2_place == Board.lader1 || Board.U2_place == Board.lader2 || Board.U2_place == Board.lader3 || Board.U2_place == Board.lader4 || Board.U2_place == Board.lader5) {
-				ladder_encounter(U2, penaltySnake2, U2p, Board.U2_place);
+				ladder_encounter(U2, penaltyLadder2, U2p, Board.U2_place);
 				refresh_screen(Board);
 			}
 		}
