@@ -56,5 +56,8 @@
     <ClInclude Include="GameAvailability.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ChangeTypeFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

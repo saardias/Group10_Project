@@ -280,8 +280,8 @@ void PrintMiddle_U1() {
 	ChangeColor(LIGHTGREY);
 }
 void PrintMiddle_U2() { 
-	ChangeColor(LIGHTRED);
 	cout << "|";
+	ChangeColor(LIGHTRED);
 	cout << "U2   "; 
 	ChangeColor(LIGHTGREY);
 }

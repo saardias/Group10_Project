@@ -217,3 +217,156 @@ bool Check_Game_Availability(string Game) {
 		}
 	}
 }
+//display activations number of the games
+void ShowingPlayCount()
+{
+	Display_Game_Run_Count("Connect Four");
+	Display_Game_Run_Count("War");
+	Display_Game_Run_Count("Snakes and Ladders");
+}
+
+// blocking a game
+void Block_Game()
+{
+	int Choice;
+	bool Flag = true;
+	do
+	{
+		system("CLS");
+		cout << endl << endl << "       ####    B L O C K     ####    " << endl << endl;
+		cout <<
+			"        1 ) Cards Wars " << endl << endl <<
+			"        2 ) Connect Four" << endl << endl <<
+			"        3 ) Snakes and Ladders" << endl << endl <<
+			"        4 ) Return" << endl << endl <<
+			"       ###################################" << endl;
+		cin >> Choice;
+		getchar();
+		switch (Choice)
+		{
+		case 1:
+			Set_Game_Availability(0, "War");
+			system("CLS");
+			cout << endl << endl << "       Cards War - Blocked" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		case 2:
+			Set_Game_Availability(0, "Connect Four");
+			system("CLS");
+			cout << endl << endl << "       Connect Four - Blocked" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		case 3:
+			Set_Game_Availability(0, "Snakes and Ladders");
+			system("CLS");
+			cout << endl << endl << "       Snakes and Ladders - Blocked" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		case 4:
+			system("CLS");
+			cout << endl << endl << "       Press Enter to return" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		default:
+			system("CLS");
+			cout << endl << endl << "       Wrong Choice. Choose Again" << endl << endl;
+			cout << "       Press Enter to Continue" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+		}
+	} while (Flag);
+}
+// enabling a game
+void Enable_Game()
+{
+	int Choice;
+	bool Flag = true;
+	do
+	{
+		system("CLS");
+		cout << endl << endl << "       ####    E N A B L E     ####    " << endl << endl;
+		cout <<
+			"        1 ) Cards Wars " << endl << endl <<
+			"        2 ) Connect Four" << endl << endl <<
+			"        3 ) Snakes and Ladders" << endl << endl <<
+			"        4 ) Return" << endl << endl <<
+			"       ###################################" << endl;
+		cin >> Choice;
+		getchar();
+		switch (Choice)
+		{
+		case 1:
+			Set_Game_Availability(1, "War");
+			cout << endl << endl << "       Cards War - Enabled" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		case 2:
+			Set_Game_Availability(1, "Connect Four");
+			cout << endl << endl << "       Connect Four - Enabled" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		case 3:
+			Set_Game_Availability(1, "Snakes and Ladders");
+			cout << endl << endl << "       Snakes and Ladders - Enabled" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		case 4:
+			system("CLS");
+			cout << endl << endl << "       Press Enter to return" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		default:
+			system("CLS");
+			cout << endl << endl << "       Wrong Choice. Choose Again" << endl << endl;
+			cout << "       Press Enter to Continue" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+		}
+	} while (Flag);
+
+}
+// menu for blocking/enabling game
+void Block_Enable_Game()
+{
+	int Choice;
+	bool Flag = true;
+	do
+	{
+		system("CLS");
+		cout << endl << endl << "       ####    Block/Enable Game     ####    " << endl << endl;
+		cout <<
+			"        1 ) Block Game" << endl << endl <<
+			"        2 ) Enable Game" << endl << endl <<
+			"        3 ) Return" << endl << endl <<
+			"       ###################################" << endl;
+		cin >> Choice;
+		getchar();
+		switch (Choice)
+		{
+		case 1:
+			Block_Game();
+			break;
+		case 2:
+			Enable_Game();
+			break;
+		case 3:
+			system("CLS");
+			cout << endl << endl << "       Press Enter to return" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			Flag = false;
+			break;
+		default:
+			system("CLS");
+			cout << endl << endl << "       Wrong Choice. Choose Again" << endl << endl;
+			cout << "       Press Enter to Continue" << endl;
+			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+		}
+	} while (Flag);
+}
+

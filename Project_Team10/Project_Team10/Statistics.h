@@ -1,9 +1,12 @@
 #pragma once
 #include <iostream>
-//#include <string>
 #include <fstream>
+#include "1.Sign_in_modules.h"
 #include "Structs.h"
 using namespace std;
+
+
+void delete_player(string name);
 
 //the function below updates the new statistic records of the winner and the defeated users especially made for Snakes and Ladders game.
 void Set_Snakes_And_Ladders_Statistics(string Winner,string Looser) { 
@@ -505,4 +508,202 @@ void Display_Personal_User_Statistics(string User) {
 	cout << "\t\t|\t\t\t\t\t\t\t |";
 	cout << endl << "\t\t|________________________________________________________|" << endl << endl << endl;
 	
+}
+
+// display list of all users in system
+void PrintingUsersList()
+{
+	ifstream users_in;
+	User temp;
+	users_in.open("user_data.txt");
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+	cout << "       \t     ******************** " << " U S E R S   L I S T  ********************" << endl << endl;
+	cout << endl;
+	while (!users_in.eof())
+	{
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		cout << "\t\t\t\t" << temp.name << " - ";
+		if (temp.if_manager)
+		{
+			cout << " Admin" << "\t\t\t\t" << endl;
+		}
+		else if (temp.if_premium)
+		{
+			cout << " Premium Player" << "\t\t\t" << endl;
+		}
+		else
+		{
+			cout << " Player" << "\t\t\t\t" << endl;
+		}
+		cout << endl;
+	}
+	users_in.close();
+}
+//checking input of users name
+bool Check_Name_Input(string name)
+{
+	ifstream users_in;
+	User temp;
+	users_in.open("user_data.txt");
+	while (!users_in.eof())
+	{
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (name == temp.name)
+		{
+			users_in.close();
+			return true;
+		}
+	}
+	users_in.close();
+	return false;
+}
+// function that display statistic of all games
+void WatchUserWinLose()
+{
+	cout << "Connect Four Statistics : " << endl;
+	Display_Statistics("Connect Four");
+	cout << "Snakes and Ladders Statistics : " << endl;
+	Display_Statistics("Snakes and Ladders");
+	cout << "Cards War Statistics : " << endl;
+	Display_Statistics("War");
+	cout << endl << endl << "       Press Enter to return to options" << endl;
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+}
+// function that display logins number of all users
+void WhatchLogins()
+{
+	ifstream users_in;
+	User temp;
+	users_in.open("user_data.txt");
+	cout << "--------------------------------------------------------------------------------------------" << endl;
+	cout << "       \t     ******************** " << " L O G I N S  C O U N T S  ********************" << endl << endl;
+	cout << endl;
+	while (!users_in.eof())
+	{
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		cout << "\t\t\t" << temp.name << "\t-\t" << temp.logins << endl << endl;
+	}
+	users_in.close();
+	cout << endl << endl << "       Press Enter to return" << endl;
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+}
+// reset login data of a user
+void ResetUserLogins(string name)
+{
+	ifstream users_in;
+	ofstream users_out;
+	User temp;
+	users_in.open("user_data.txt");
+	users_out.open("temp.txt");
+	while (!users_in.eof()) {
+		users_in >> temp.name;
+		users_in >> temp.password;
+		users_in >> temp.logins;
+		users_in >> temp.if_manager;
+		users_in >> temp.if_premium;
+		if (temp.name == name)
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << 0 << endl;
+			users_out << temp.if_manager << endl;
+			users_out << temp.if_premium;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+		else
+		{
+			users_out << temp.name << endl;
+			users_out << temp.password << endl;
+			users_out << temp.logins << endl;
+			users_out << temp.if_manager << endl;
+			users_out << temp.if_premium;
+			if (users_in.peek() != std::ifstream::traits_type::eof())
+				users_out << endl;
+		}
+	}
+	users_in.close();
+	users_out.close();
+	remove("user_data.txt");
+	rename("temp.txt", "user_data.txt");
+}
+// reset data of a user
+void ResetUserStats()
+{
+	bool flag = false;
+	string name;
+	cout << "Connect Four Statistics : " << endl;
+	Display_Statistics("Connect Four");
+	cout << "Snakes and Ladders Statistics : " << endl;
+	Display_Statistics("Snakes and Ladders");
+	cout << "Cards War Statistics : " << endl;
+	Display_Statistics("War");
+	cout << endl;
+	do
+	{
+		cout << "\t\t enter the name of a player to reset his stats. 'exit' to return" << endl;
+		cin >> name;
+		if (name == "exit")
+		{
+			flag = false;
+		}
+		else if (Check_Name_Input(name))
+		{
+			flag = false;
+		}
+		else
+		{
+			cout << "\t\t Name Does not exist !" << endl;
+			flag = true;
+		}
+	} while (flag);
+	Master_Statistics_Reset(name);
+	ResetUserLogins(name);
+	cout << endl << endl << "\t\t Press Enter to return" << endl;
+	getchar();
+	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+}
+// deleting user from system
+void DeletePlayerFromData(User &user1, User &user2)
+{
+	bool flag = false;
+	string name;
+	PrintingUsersList();
+	do
+	{
+		cout << "\t\t enter name of a player to delete from system . 'exit' to return" << endl;
+		cin >> name;
+		if (name == "exit")
+		{
+			flag = false;
+		}
+		else if (name == user1.name || name == user2.name)
+		{
+			cout << "\t\t Can't delete connected users !" << endl;
+			flag = true;
+		}
+		else if (Check_Name_Input(name))
+		{
+			delete_player(name);
+			Data_Base_User_Removal(name);
+			flag = false;
+		}
+		else
+		{
+			cout << "\t\t Name Does not exist !" << endl;
+			flag = true;
+		}
+	} while (flag);
 }

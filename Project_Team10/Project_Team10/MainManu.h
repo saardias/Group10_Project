@@ -11,6 +11,7 @@
 #include "Statistics.h"
 #include "ScoreBoard.h"
 #include "GameAvailability.h"
+#include "ChangeTypeFunctions.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
@@ -24,26 +25,10 @@ void SnakesAndLadders_Menu(User &user1, User &user2);
 void Options_player(User &user1);
 void Options_Admin(User &user1, User &user2);
 void Options_premium(User &user1, User &user2);
-void WatchUserWinLose();
-void PrintingUsersList();
-void WhatchLogins();
-void ResetUserStats();
-bool Check_Name_Input(string name);
-bool Check_Name_Input_of_UserToPremium(string name);
-void ChangeUserToPremium(string name);
-void UserToPremium(User &user2);
-void ResetUserLogins(string name);
-void Change_user_type(User &user1, User &user2);
-void PremiumToUser();
-void UserToAdmin(User &user, User &user2);
-void Excahnge_Type_With_Player(User &user, User &user2);
-void Pre_Lost(User &pre, User &NewPre);
-void DeletePlayerFromData(User &user1, User &user2);
-void Block_Enable_Game();
-void Block_Game();
-void Enable_Game();
-void ShowingPlayCount();
 
+
+
+// main menu
 void MainMenu(User user1, User user2)
 {
 	int Choice;
@@ -105,7 +90,7 @@ void MainMenu(User user1, User user2)
 		}
 	} while (Flag);
 }
-
+// play a game menu
 void Play_A_Game(User &user1, User &user2)
 {
 	int Choice;
@@ -179,7 +164,7 @@ void Play_A_Game(User &user1, User &user2)
 		}
 	} while (Flag);
 }
-
+// card wars menu
 void CardsWars_Menu(User &user1, User &user2)
 {
 	int Choice;
@@ -221,7 +206,7 @@ void CardsWars_Menu(User &user1, User &user2)
 		}
 	} while (Flag);
 }
-
+// connect4 menu
 void Connect4_Menu(User &user1, User &user2)
 {
 	int Choice;
@@ -266,7 +251,7 @@ void Connect4_Menu(User &user1, User &user2)
 		}
 	} while (Flag);
 }
-
+// S&L menu
 void SnakesAndLadders_Menu(User &user1, User &user2)
 {
 	int Choice;
@@ -307,7 +292,7 @@ void SnakesAndLadders_Menu(User &user1, User &user2)
 		}
 	} while (Flag);
 }
-
+// option menu of player 
 void Options_player(User &user1)
 {
 	int Choice;
@@ -344,7 +329,7 @@ void Options_player(User &user1)
 		}
 	} while (Flag);
 }
-
+// option menu of admin 
 void Options_Admin(User &user1, User &user2)
 {
 	int Choice;
@@ -411,7 +396,7 @@ void Options_Admin(User &user1, User &user2)
 		}
 	} while (Flag);
 }
-
+// option menu of premium 
 void Options_premium(User &user1, User &user2)
 {
 	int Choice;
@@ -466,591 +451,4 @@ void Options_premium(User &user1, User &user2)
 			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 		}
 	} while (Flag);
-}
-
-void WatchUserWinLose()
-{
-	cout << "Connect Four Statistics : " << endl;
-	Display_Statistics("Connect Four");
-	cout << "Snakes and Ladders Statistics : " << endl;
-	Display_Statistics("Snakes and Ladders");
-	cout << "Cards War Statistics : " << endl;
-	Display_Statistics("War");
-	cout << endl << endl << "       Press Enter to return to options" << endl;
-	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-}
-void PrintingUsersList()
-{
-	ifstream users_in;
-	User temp;
-	users_in.open("user_data.txt");
-	cout << "--------------------------------------------------------------------------------------------" << endl;
-	cout << "       \t     ******************** " << " U S E R S   L I S T  ********************" << endl << endl;
-	cout << endl;
-	while (!users_in.eof())
-	{
-		users_in >> temp.name;
-		users_in >> temp.password;
-		users_in >> temp.logins;
-		users_in >> temp.if_manager;
-		users_in >> temp.if_premium;
-		cout << "\t\t\t\t" << temp.name << " - ";
-		if (temp.if_manager)
-		{
-			cout << " Admin" << "\t\t\t\t" << endl;
-		}
-		else if (temp.if_premium)
-		{
-			cout << " Premium Player" << "\t\t\t" << endl;
-		}
-		else
-		{
-			cout << " Player" << "\t\t\t\t" << endl;
-		}
-		cout << endl;
-	}
-	users_in.close();
-}
-void WhatchLogins()
-{
-	ifstream users_in;
-	User temp;
-	users_in.open("user_data.txt");
-	cout << "--------------------------------------------------------------------------------------------" << endl;
-	cout << "       \t     ******************** " << " L O G I N S  C O U N T S  ********************" << endl << endl;
-	cout << endl;
-	while (!users_in.eof())
-	{
-		users_in >> temp.name;
-		users_in >> temp.password;
-		users_in >> temp.logins;
-		users_in >> temp.if_manager;
-		users_in >> temp.if_premium;
-		cout << "\t\t\t" << temp.name << "\t-\t" << temp.logins << endl << endl;
-	}
-	users_in.close();
-	cout << endl << endl << "       Press Enter to return" << endl;
-	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-}
-void ResetUserStats()
-{
-	bool flag = false;
-	string name;
-	cout << "Connect Four Statistics : " << endl;
-	Display_Statistics("Connect Four");
-	cout << "Snakes and Ladders Statistics : " << endl;
-	Display_Statistics("Snakes and Ladders");
-	cout << "Cards War Statistics : " << endl;
-	Display_Statistics("War");
-	cout << endl;
-	do
-	{
-		cout << "\t\t enter the name of a player to reset his stats. 'exit' to return" << endl;
-		cin >> name;
-		if (name == "exit")
-		{
-			flag = false;
-		}
-		else if (Check_Name_Input(name))
-		{
-			flag = false;
-		}
-		else
-		{
-			cout << "\t\t Name Does not exist !" << endl;
-			flag = true;
-		}
-	} while (flag);
-	Master_Statistics_Reset(name);
-	ResetUserLogins(name);
-	cout << endl << endl << "\t\t Press Enter to return" << endl;
-	getchar();
-	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-}
-bool Check_Name_Input(string name)
-{
-	ifstream users_in;
-	User temp;
-	users_in.open("user_data.txt");
-	while (!users_in.eof())
-	{
-		users_in >> temp.name;
-		users_in >> temp.password;
-		users_in >> temp.logins;
-		users_in >> temp.if_manager;
-		users_in >> temp.if_premium;
-		if (name == temp.name)
-		{
-			users_in.close();
-			return true;
-		}
-	}
-	users_in.close();
-	return false;
-}
-bool Check_Name_Input_of_UserToPremium(string name)
-{
-	ifstream users_in;
-	User temp;
-	users_in.open("user_data.txt");
-	while (!users_in.eof())
-	{
-		users_in >> temp.name;
-		users_in >> temp.password;
-		users_in >> temp.logins;
-		users_in >> temp.if_manager;
-		users_in >> temp.if_premium;
-		if (name == temp.name && (temp.if_manager == 1 || temp.if_premium == 1))
-		{
-			cout << "\t\t This user is not a player!" << endl;
-			users_in.close();
-			return false;
-		}
-		if (name == temp.name)
-		{
-			users_in.close();
-			return true;
-		}
-	}
-	users_in.close();
-	cout << "\t\t Name Does not exist !" << endl;
-	return false;
-}
-void ChangeUserToPremium(string name)
-{
-	ifstream users_in;
-	ofstream users_out;
-	User temp;
-	users_in.open("user_data.txt");
-	users_out.open("temp.txt");
-	while (!users_in.eof()) {
-		users_in >> temp.name;
-		users_in >> temp.password;
-		users_in >> temp.logins;
-		users_in >> temp.if_manager;
-		users_in >> temp.if_premium;
-		if (temp.name == name)
-		{
-			users_out << temp.name << endl;
-			users_out << temp.password << endl;
-			users_out << temp.logins << endl;
-			users_out << temp.if_manager << endl;
-			users_out << 1;
-			if (users_in.peek() != std::ifstream::traits_type::eof())
-				users_out << endl;
-		}
-		else
-		{
-			users_out << temp.name << endl;
-			users_out << temp.password << endl;
-			users_out << temp.logins << endl;
-			users_out << temp.if_manager << endl;
-			users_out << temp.if_premium;
-			if (users_in.peek() != std::ifstream::traits_type::eof())
-				users_out << endl;
-		}
-	}
-	users_in.close();
-	users_out.close();
-	remove("user_data.txt");
-	rename("temp.txt", "user_data.txt");
-}
-void ResetUserLogins(string name)
-{
-	ifstream users_in;
-	ofstream users_out;
-	User temp;
-	users_in.open("user_data.txt");
-	users_out.open("temp.txt");
-	while (!users_in.eof()) {
-		users_in >> temp.name;
-		users_in >> temp.password;
-		users_in >> temp.logins;
-		users_in >> temp.if_manager;
-		users_in >> temp.if_premium;
-		if (temp.name == name)
-		{
-			users_out << temp.name << endl;
-			users_out << temp.password << endl;
-			users_out << 0 << endl;
-			users_out << temp.if_manager << endl;
-			users_out << temp.if_premium;
-			if (users_in.peek() != std::ifstream::traits_type::eof())
-				users_out << endl;
-		}
-		else
-		{
-			users_out << temp.name << endl;
-			users_out << temp.password << endl;
-			users_out << temp.logins << endl;
-			users_out << temp.if_manager << endl;
-			users_out << temp.if_premium;
-			if (users_in.peek() != std::ifstream::traits_type::eof())
-				users_out << endl;
-		}
-	}
-	users_in.close();
-	users_out.close();
-	remove("user_data.txt");
-	rename("temp.txt", "user_data.txt");
-}
-void Change_user_type(User &user1, User &user2)
-{
-	int choice;
-	bool Flag = true;
-	PrintingUsersList();
-	do
-	{
-		cout << endl << endl << "\t\t Press Enter your choice : " << endl
-			<< endl << "\t\t 1 - change player to premium" << endl
-			<< endl << "\t\t 2 - change player to admin" << endl
-			<< endl << "\t\t 3 - change premium player to player" << endl
-			<< endl << "\t\t 4 - return " << endl;
-		cin >> choice;
-		switch (choice)
-		{
-		case 1:
-			UserToPremium(user2);
-			system("CLS");
-			PrintingUsersList();
-			break;
-		case 2:
-			UserToAdmin(user1, user2);
-			break;
-		case 3:
-			PremiumToUser();
-			system("CLS");
-			PrintingUsersList();
-			break;
-		case 4:
-			Flag = false;
-			break;
-		default:
-			system("CLS");
-			cout << endl << endl << "\t\tWrong Choice. Choose Again" << endl << endl;
-			cout << "\t\tPress Enter to Continue" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-		}
-	} while (Flag);
-}
-void UserToPremium(User &user2)
-{
-	string name;
-	bool flag = true;
-	do
-	{
-		cout << "\t\t enter the name of a player. 'exit' - return" << endl;
-		cin >> name;
-		if (name == "exit")
-		{
-			flag = false;
-		}
-		else
-		{
-			if (Check_Name_Input_of_UserToPremium(name))
-			{
-				flag = false;
-			}
-			else
-			{
-				flag = true;
-			}
-		}
-	} while (flag);
-	PremiumToUser();
-	if (user2.if_premium == 1)
-	{
-		user2.if_premium = 0;
-	}
-	ChangeUserToPremium(name);
-	if (name == user2.name)
-	{
-		user2.if_premium = 1;
-	}
-}
-void PremiumToUser()
-{
-	ifstream users_in;
-	ofstream users_out;
-	User temp;
-	users_in.open("user_data.txt");
-	users_out.open("temp.txt");
-	while (!users_in.eof()) {
-		users_in >> temp.name;
-		users_in >> temp.password;
-		users_in >> temp.logins;
-		users_in >> temp.if_manager;
-		users_in >> temp.if_premium;
-		if (temp.if_premium)
-		{
-			users_out << temp.name << endl;
-			users_out << temp.password << endl;
-			users_out << temp.logins << endl;
-			users_out << temp.if_manager << endl;
-			users_out << 0;
-			if (users_in.peek() != std::ifstream::traits_type::eof())
-				users_out << endl;
-		}
-		else
-		{
-			users_out << temp.name << endl;
-			users_out << temp.password << endl;
-			users_out << temp.logins << endl;
-			users_out << temp.if_manager << endl;
-			users_out << temp.if_premium;
-			if (users_in.peek() != std::ifstream::traits_type::eof())
-				users_out << endl;
-		}
-	}
-	users_in.close();
-	users_out.close();
-	remove("user_data.txt");
-	rename("temp.txt", "user_data.txt");
-}
-void Excahnge_Type_With_Player(User &user1, User &user2)
-{
-	bool flag = false;
-	string name;
-	PrintingUsersList();
-	do
-	{
-		cout << "\t\t enter the name of a player." << endl;
-		cin >> name;
-		if (Check_Name_Input_of_UserToPremium(name))
-		{
-			flag = false;
-		}
-		else
-		{
-			flag = true;
-		}
-	} while (flag);
-	PremiumToUser();
-	if (user2.if_premium == 1)
-	{
-		user2.if_premium = 0;
-	}
-	if (user1.if_premium == 1)
-	{
-		user1.if_premium = 0;
-	}
-	ChangeUserToPremium(name);
-	if (name == user2.name)
-	{
-		user2.if_premium = 1;
-	}
-	if (name == user1.name)
-	{
-		user2.if_premium = 1;
-	}
-}
-void Pre_Lost(User &pre, User &NewPre)
-{
-	PremiumToUser();
-	if (pre.if_premium == 1)
-	{
-		pre.if_premium = 0;
-	}
-	ChangeUserToPremium(NewPre.name);
-	NewPre.if_premium = 1;
-}
-void DeletePlayerFromData(User &user1, User &user2)
-{
-	bool flag = false;
-	string name;
-	PrintingUsersList();
-	do
-	{
-		cout << "\t\t enter name of a player to delete from system . 'exit' to return" << endl;
-		cin >> name;
-		if (name == "exit")
-		{
-			flag = false;
-		}
-		else if (name == user1.name || name == user2.name)
-		{
-			cout << "\t\t Can't delete connected users !" << endl;
-			flag = true;
-		}
-		else if (Check_Name_Input(name))
-		{
-			delete_player(name);
-			Data_Base_User_Removal(name);
-			flag = false;
-		}
-		else
-		{
-			cout << "\t\t Name Does not exist !" << endl;
-			flag = true;
-		}
-	} while (flag);
-}
-void UserToAdmin(User &user1, User &user2)
-{
-	string name;
-	bool flag = true;
-	do
-	{
-		cout << "\t\t enter the name of a player. 'exit' - to return" << endl;
-		cin >> name;
-		if (name == "exit")
-		{
-			system("CLS");
-			flag = false;
-		}
-		else
-		{
-			make_admin(name, user1, user2);
-			system("CLS");
-			PrintingUsersList();
-		}
-	} while (flag);
-	PrintingUsersList();
-}
-void Block_Enable_Game()
-{
-	int Choice;
-	bool Flag = true;
-	do
-	{
-		system("CLS");
-		cout << endl << endl << "       ####    Block/Enable Game     ####    " << endl << endl;
-		cout <<
-			"        1 ) Block Game" << endl << endl <<
-			"        2 ) Enable Game" << endl << endl <<
-			"        3 ) Return" << endl << endl <<
-			"       ###################################" << endl;
-		cin >> Choice;
-		getchar();
-		switch (Choice)
-		{
-		case 1:
-			Block_Game();
-			break;
-		case 2:
-			Enable_Game();
-			break;
-		case 3:
-			system("CLS");
-			cout << endl << endl << "       Press Enter to return" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		default:
-			system("CLS");
-			cout << endl << endl << "       Wrong Choice. Choose Again" << endl << endl;
-			cout << "       Press Enter to Continue" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-		}
-	} while (Flag);
-}
-void Block_Game()
-{
-	int Choice;
-	bool Flag = true;
-	do
-	{
-		system("CLS");
-		cout << endl << endl << "       ####    B L O C K     ####    " << endl << endl;
-		cout <<
-			"        1 ) Cards Wars " << endl << endl <<
-			"        2 ) Connect Four" << endl << endl <<
-			"        3 ) Snakes and Ladders" << endl << endl <<
-			"        4 ) Return" << endl << endl <<
-			"       ###################################" << endl;
-		cin >> Choice;
-		getchar();
-		switch (Choice)
-		{
-		case 1:
-			Set_Game_Availability(0, "War");
-			system("CLS");
-			cout << endl << endl << "       Cards War - Blocked" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		case 2:
-			Set_Game_Availability(0, "Connect Four");
-			system("CLS");
-			cout << endl << endl << "       Connect Four - Blocked" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		case 3:
-			Set_Game_Availability(0, "Snakes and Ladders");
-			system("CLS");
-			cout << endl << endl << "       Snakes and Ladders - Blocked" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		case 4:
-			system("CLS");
-			cout << endl << endl << "       Press Enter to return" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		default:
-			system("CLS");
-			cout << endl << endl << "       Wrong Choice. Choose Again" << endl << endl;
-			cout << "       Press Enter to Continue" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-		}
-	} while (Flag);
-}
-void Enable_Game()
-{
-	int Choice;
-	bool Flag = true;
-	do
-	{
-		system("CLS");
-		cout << endl << endl << "       ####    E N A B L E     ####    " << endl << endl;
-		cout <<
-			"        1 ) Cards Wars " << endl << endl <<
-			"        2 ) Connect Four" << endl << endl <<
-			"        3 ) Snakes and Ladders" << endl << endl <<
-			"        4 ) Return" << endl << endl <<
-			"       ###################################" << endl;
-		cin >> Choice;
-		getchar();
-		switch (Choice)
-		{
-		case 1:
-			Set_Game_Availability(1, "War");
-			cout << endl << endl << "       Cards War - Enabled" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		case 2:
-			Set_Game_Availability(1, "Connect Four");
-			cout << endl << endl << "       Connect Four - Enabled" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		case 3:
-			Set_Game_Availability(1, "Snakes and Ladders");
-			cout << endl << endl << "       Snakes and Ladders - Enabled" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		case 4:
-			system("CLS");
-			cout << endl << endl << "       Press Enter to return" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-			Flag = false;
-			break;
-		default:
-			system("CLS");
-			cout << endl << endl << "       Wrong Choice. Choose Again" << endl << endl;
-			cout << "       Press Enter to Continue" << endl;
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-		}
-	} while (Flag);
-
-}
-void ShowingPlayCount()
-{
-	Display_Game_Run_Count("Connect Four");
-	Display_Game_Run_Count("War");
-	Display_Game_Run_Count("Snakes and Ladders");
 }
