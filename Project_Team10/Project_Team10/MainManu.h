@@ -185,7 +185,7 @@ void CardsWars_Menu(User &user1, User &user2)
 		case 1:
 			system("CLS");
 			Set_Game_Run_Count("War");
-			PlayWar(user1, user2);	//Changed here to play war against user to just play war
+			PlayWar(user1, user2);	
 			break;
 		case 2:
 			system("CLS");

@@ -41,7 +41,7 @@ void WarGameWinner(User &win, User &looser, int winner_points, int looser_points
 	std::cout << "====================================" << endl;
 
 	Set_Cards_Battle_Statistics(win.name, looser.name);
-
+	Set_Cards_Score_Board(win.name, winner_points);
 	std::cout << "press enter to exit" << endl;
 	cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 
