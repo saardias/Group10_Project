@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include "MainManu.h"
 #include "Statistics.h"
-
+#include "ScoreBoard.h"
 using namespace std;
 #define _CRT_SECURE_NO_WARNINGS
 void Pre_Lost(User &pre, User &NewPre);
